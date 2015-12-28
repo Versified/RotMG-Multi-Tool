@@ -1,7 +1,6 @@
 ﻿using MetroFramework.Forms;
 using RotMG_Multitool.Serializers;
 using System;
-using System.Globalization;
 using System.Windows.Forms;
 
 namespace RotMG_Multitool
@@ -78,7 +77,6 @@ namespace RotMG_Multitool
 
                 remoteTexture = true;
             }
-
         }
 
         private int GetSlotTypeFromItem(string item)
