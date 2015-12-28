@@ -41,13 +41,17 @@
             this.itemCreatorButton.UseSelectable = true;
             this.itemCreatorButton.Click += new System.EventHandler(this.itemCreatorButton_Click);
             // 
-            // Form1
+            // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(407, 432);
+            this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
+            this.ClientSize = new System.Drawing.Size(336, 106);
             this.Controls.Add(this.itemCreatorButton);
-            this.Name = "Form1";
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Name = "HomeForm";
+            this.Resizable = false;
+            this.Style = MetroFramework.MetroColorStyle.Purple;
             this.Text = "RotMG Multi-Tool v0.1";
             this.ResumeLayout(false);
 
