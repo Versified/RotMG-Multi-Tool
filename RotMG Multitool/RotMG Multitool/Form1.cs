@@ -17,5 +17,10 @@ namespace RotMG_Multitool
         {
             InitializeComponent();
         }
+
+        private void itemCreatorButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

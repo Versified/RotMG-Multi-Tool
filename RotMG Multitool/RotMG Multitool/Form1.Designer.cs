@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.itemCreatorButton = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
+            // 
+            // itemCreatorButton
+            // 
+            this.itemCreatorButton.Location = new System.Drawing.Point(23, 63);
+            this.itemCreatorButton.Name = "itemCreatorButton";
+            this.itemCreatorButton.Size = new System.Drawing.Size(75, 23);
+            this.itemCreatorButton.TabIndex = 4;
+            this.itemCreatorButton.Text = "Item Creator";
+            this.itemCreatorButton.UseSelectable = true;
+            this.itemCreatorButton.Click += new System.EventHandler(this.itemCreatorButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(407, 432);
+            this.Controls.Add(this.itemCreatorButton);
             this.Name = "Form1";
             this.Text = "RotMG Multi-Tool v0.1";
             this.ResumeLayout(false);
@@ -42,6 +54,9 @@
         }
 
         #endregion
+
+        private MetroFramework.Controls.MetroButton itemCreatorButton;
+
     }
 }
 
