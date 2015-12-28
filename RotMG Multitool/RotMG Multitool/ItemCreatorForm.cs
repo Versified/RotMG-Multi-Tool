@@ -19,7 +19,9 @@ namespace RotMG_Multitool
 
         private void createXMLButton_Click(object sender, EventArgs e)
         {
-
         }
+
+        public uint objectId { get; set; }
+        public string itemName { get; set; }
     }
 }
