@@ -21,12 +21,7 @@ namespace RotMG_Multitool
         private void itemCreatorButton_Click(object sender, EventArgs e)
         {
             ItemCreatorForm itemForm = new ItemCreatorForm();
-
-            // Doesn't work.
-            if (!itemForm.Visible)
-            {
-                itemForm.Show();
-            }
+            itemForm.ShowDialog();
         }
     }
 }
