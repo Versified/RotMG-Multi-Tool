@@ -58,6 +58,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnemyCreatorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnemyCreatorForm.Designer.cs">
+      <DependentUpon>EnemyCreatorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemoteTextureForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RemoteTextureForm.Designer.cs">
+      <DependentUpon>RemoteTextureForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="EnemyCreatorForm.resx">
+      <DependentUpon>EnemyCreatorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -87,6 +102,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RemoteTextureForm.resx">
+      <DependentUpon>RemoteTextureForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -72,7 +72,7 @@
             this.Name = "ItemCreatorForm";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Purple;
-            this.Text = "Item Generator";
+            this.Text = "Item Creator";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             this.itemCreatorButton = new MetroFramework.Controls.MetroButton();
+            this.enemyCreatorButton = new MetroFramework.Controls.MetroButton();
+            this.remoteTextureButton = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // itemCreatorButton
             // 
-            this.itemCreatorButton.Location = new System.Drawing.Point(23, 63);
+            this.itemCreatorButton.Location = new System.Drawing.Point(41, 63);
             this.itemCreatorButton.Name = "itemCreatorButton";
             this.itemCreatorButton.Size = new System.Drawing.Size(75, 23);
             this.itemCreatorButton.TabIndex = 4;
@@ -41,12 +43,34 @@
             this.itemCreatorButton.UseSelectable = true;
             this.itemCreatorButton.Click += new System.EventHandler(this.itemCreatorButton_Click);
             // 
+            // enemyCreatorButton
+            // 
+            this.enemyCreatorButton.Location = new System.Drawing.Point(122, 63);
+            this.enemyCreatorButton.Name = "enemyCreatorButton";
+            this.enemyCreatorButton.Size = new System.Drawing.Size(88, 23);
+            this.enemyCreatorButton.TabIndex = 5;
+            this.enemyCreatorButton.Text = "Enemy Creator";
+            this.enemyCreatorButton.UseSelectable = true;
+            this.enemyCreatorButton.Click += new System.EventHandler(this.enemyCreatorButton_Click);
+            // 
+            // remoteTextureButton
+            // 
+            this.remoteTextureButton.Location = new System.Drawing.Point(216, 63);
+            this.remoteTextureButton.Name = "remoteTextureButton";
+            this.remoteTextureButton.Size = new System.Drawing.Size(97, 23);
+            this.remoteTextureButton.TabIndex = 6;
+            this.remoteTextureButton.Text = "Remote Texture";
+            this.remoteTextureButton.UseSelectable = true;
+            this.remoteTextureButton.Click += new System.EventHandler(this.remoteTextureButton_Click);
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(336, 106);
+            this.Controls.Add(this.remoteTextureButton);
+            this.Controls.Add(this.enemyCreatorButton);
             this.Controls.Add(this.itemCreatorButton);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "HomeForm";
@@ -60,6 +84,8 @@
         #endregion
 
         private MetroFramework.Controls.MetroButton itemCreatorButton;
+        private MetroFramework.Controls.MetroButton enemyCreatorButton;
+        private MetroFramework.Controls.MetroButton remoteTextureButton;
 
     }
 }
