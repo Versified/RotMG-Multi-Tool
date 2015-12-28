@@ -1,6 +1,6 @@
 ﻿namespace RotMG_Multitool
 {
-    partial class Form1
+    partial class HomeForm
     {
         /// <summary>
         /// Required designer variable.

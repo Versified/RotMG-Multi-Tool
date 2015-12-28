@@ -7,20 +7,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace RotMG_Multitool
 {
-    public partial class Form1 : MetroForm
+    public partial class ItemCreatorForm : MetroForm
     {
-        public Form1()
+        public ItemCreatorForm()
         {
             InitializeComponent();
-        }
-
-        private void itemCreatorButton_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
