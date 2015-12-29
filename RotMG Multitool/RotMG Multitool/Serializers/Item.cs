@@ -1,20 +1,4 @@
-﻿//<Object type="0xa00" id="Short Sword">
-//    <Class>Equipment</Class>
-//    <Item/>
-//    <Texture>
-//      <File>lofiObj5</File>
-//      <Index>0x30</Index>
-//    </Texture>
-//    <SlotType>1</SlotType>
-//    <Tier>0</Tier>
-//    <Description>A steel short sword.</Description>
-//    <RateOfFire>1</RateOfFire>
-//    <Sound>weapon/blunt_sword</Sound>
-//    <LevelReq>1</LevelReq> // Not used.
-//    <BagType>0</BagType>
-//    <OldSound>bladeSwing</OldSound>
-//  </Object>
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
