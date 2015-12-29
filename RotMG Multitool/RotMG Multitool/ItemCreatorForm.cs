@@ -83,26 +83,12 @@ namespace RotMG_Multitool
         {
             switch (item)
             {
-                case "Sword":
-                    return 1;
-                    break;
-
-                case "Dagger":
-                    return 2;
-                    break;
-
-                case "Bow":
-                    return 3;
-                    break;
-                case "Wand":
-                    return 8;
-                    break;
-                case "Staff":
-                    return 17;
-                    break;
-                default:
-                    return 1;
-                    break;
+                case "Sword": return 1;
+                case "Dagger": return 2;
+                case "Bow": return 3;
+                case "Wand": return 8;
+                case "Staff": return 17;
+                default: return 1;
             }
         }
 
@@ -110,24 +96,12 @@ namespace RotMG_Multitool
         {
             switch (bagtype)
             {
-                case "Brown Bag":
-                    return 0;
-                    break;
-                case "Purple Bag":
-                    return 1;
-                    break;
-                case "High Tiered Bag":
-                    return 2;
-                    break;
-                case "Potion Bag":
-                    return 3;
-                    break;
-                case "White Bag":
-                    return 4;
-                    break;
-                default:
-                    return 4;
-                    break;
+                case "Brown Bag": return 0;
+                case "Purple Bag": return 1;
+                case "High Tiered Bag": return 2;
+                case "Potion Bag": return 3;
+                case "White Bag": return 4;
+                default: return 4;
             }
         }
     }
