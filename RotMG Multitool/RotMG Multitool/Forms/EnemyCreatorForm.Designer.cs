@@ -36,6 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(300, 300);
+            this.MaximizeBox = false;
             this.Name = "enemyCreatorForm";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Purple;

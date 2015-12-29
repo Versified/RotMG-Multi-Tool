@@ -46,6 +46,7 @@
       <HintPath>..\packages\MetroModernUI.1.3.5.0\lib\net45\MetroFramework.Fonts.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -58,40 +59,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnemyCreatorForm.cs">
+    <Compile Include="Forms\EnemyCreatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EnemyCreatorForm.Designer.cs">
+    <Compile Include="Forms\EnemyCreatorForm.Designer.cs">
       <DependentUpon>EnemyCreatorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HomeForm.cs">
+    <Compile Include="Forms\HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HomeForm.Designer.cs">
+    <Compile Include="Forms\HomeForm.Designer.cs">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ItemCreatorForm.cs">
+    <Compile Include="InterprolatedBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\ItemCreatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ItemCreatorForm.Designer.cs">
+    <Compile Include="Forms\ItemCreatorForm.Designer.cs">
       <DependentUpon>ItemCreatorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RemoteTextureForm.cs">
+    <Compile Include="Forms\RemoteTextureForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RemoteTextureForm.Designer.cs">
+    <Compile Include="Forms\RemoteTextureForm.Designer.cs">
       <DependentUpon>RemoteTextureForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Serializers\Item.cs" />
-    <EmbeddedResource Include="EnemyCreatorForm.resx">
+    <EmbeddedResource Include="Forms\EnemyCreatorForm.resx">
       <DependentUpon>EnemyCreatorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomeForm.resx">
+    <EmbeddedResource Include="Forms\HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ItemCreatorForm.resx">
+    <EmbeddedResource Include="Forms\ItemCreatorForm.resx">
       <DependentUpon>ItemCreatorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -103,7 +107,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RemoteTextureForm.resx">
+    <EmbeddedResource Include="Forms\RemoteTextureForm.resx">
       <DependentUpon>RemoteTextureForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
