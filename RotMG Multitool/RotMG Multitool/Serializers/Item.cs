@@ -15,6 +15,7 @@
 //    <OldSound>bladeSwing</OldSound>
 //  </Object>
 using System;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
@@ -47,6 +48,10 @@ namespace RotMG_Multitool.Serializers
                 var document = new XmlDocument();
 
                 var @object = document.CreateElement("Object"); // @object because "object" is a keyword
+
+                System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo(1033);
+                var comment = document.CreateComment("Generated on " + DateTime.Today.ToShortDateString() + " at " + DateTime.Now.ToShortTimeString());
+                document.AppendChild(comment);
 
                 var objectType = document.CreateAttribute("type");
                 objectType.Value = ObjectType.ToString();
@@ -134,7 +139,16 @@ namespace RotMG_Multitool.Serializers
 
                 var writer = new StringWriter();
                 document.Save(writer);
-                MessageBox.Show(writer.ToString(), "Output");
+
+                var desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                var fullFileName = Path.Combine(desktopFolder, "Generated Item.xml");
+
+                DialogResult dlr = MessageBox.Show(writer.ToString(), "Finished XML", MessageBoxButtons.YesNo);
+                if (dlr == DialogResult.Yes)
+                {
+                    MessageBox.Show("Saving generated XML file to \r\n" + fullFileName);
+                    document.Save(fullFileName);
+                }
             }
             catch (Exception ex)
             {
