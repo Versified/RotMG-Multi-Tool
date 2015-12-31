@@ -1,10 +1,10 @@
 ﻿using MetroFramework.Forms;
 
-namespace RotMG_Multitool.Forms
+namespace RotMG_Multitool
 {
-    public partial class EnemyCreatorForm : MetroForm
+    public partial class enemyCreatorForm : MetroForm
     {
-        public EnemyCreatorForm()
+        public enemyCreatorForm()
         {
             InitializeComponent();
         }

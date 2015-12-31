@@ -1,21 +1,21 @@
-﻿using System;
+﻿using MetroFramework.Forms;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using MetroFramework.Forms;
 using Microsoft.VisualBasic;
 
-namespace RotMG_Multitool.Forms
-{
-    public partial class RemoteTextureForm : MetroForm
-    {
-        private readonly ListViewItem[] realItems;
-        private int perPage = 200;
-        private bool hasClicked;
 
-        public RemoteTextureForm()
+namespace RotMG_Multitool
+{
+    public partial class remoteTextureForm : MetroForm
+    {
+        ListViewItem[] realItems;
+        int perPage = 200;
+        bool hasClicked = false;
+
+        public remoteTextureForm()
         {
             InitializeComponent();
             realItems = new ListViewItem[perPage];
@@ -27,25 +27,32 @@ namespace RotMG_Multitool.Forms
             {
                 hasClicked = true;
                 listOfName.Clear();
-                var wc = new WebClient();
-                var result = wc.DownloadString("http://realmofthemadgod.appspot.com/picture/list?num=" + perPage + "&tags=" + textBox1.Text);
+                WebClient wc = new WebClient();
+                string result = wc.DownloadString("http://realmofthemadgod.appspot.com/picture/list?num=" + perPage + "&tags=" + textBox1.Text);
 
-                var xDoc = XDocument.Parse(result);
-                var pics = new List<Picture>();
+                XDocument xDoc = XDocument.Parse(result);
+                List<Picture> pics = new List<Picture>();
 
-                if (!(xDoc.Root?.HasElements ?? false)) return;
-                pics.AddRange(xDoc.Root.Elements("Pic").Select(Picture.FromXElement));
+                if (xDoc.Root.HasElements)
+                {
+                    foreach (XElement x in xDoc.Root.Elements("Pic"))
+                        pics.Add(Picture.FromXElement(x));
 
-                foreach (var p in pics)
-                    listOfName.Items.Add(new ListViewItem
+                    foreach (var p in pics)
                     {
-                        Text = p.Name,
-                        Tag = p.ID
-                    });
-                listOfName.Items.CopyTo(realItems, 0);
+                        listOfName.Items.Add(new ListViewItem
+                        {
+                            Text = p.Name,
+                            Tag = p.ID
+                        });
+                    }
+                    listOfName.Items.CopyTo(realItems, 0);
+                }
             }
             else
+            {
                 MessageBox.Show("You must enter a tag to search for first", "Silly you");
+            }
         }
 
         public class Picture
@@ -99,10 +106,8 @@ namespace RotMG_Multitool.Forms
         private void metroButton4_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Here you can set how many objects appear");
-            var howManyPerPage = Interaction.InputBox("How many objects to show (Don't go overboard or R.I.P)", "Configuration", "200", -1, -1);
-            int val;
-            if (Int32.TryParse(howManyPerPage, out val))
-                perPage = val;
+            string howManyPerPage = Interaction.InputBox("How many objects to show (Don't go overboard or R.I.P)", "Configuration", "200", -1, -1);
+            perPage = int.Parse(howManyPerPage);
         }
     }
 }

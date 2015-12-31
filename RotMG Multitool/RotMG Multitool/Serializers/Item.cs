@@ -4,133 +4,135 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using RotMG_Multitool.Forms;
 
 namespace RotMG_Multitool.Serializers
 {
     internal class Item
     {
-        private readonly  ItemCreatorForm itemCreatorForm;
+        public static string ObjectId { get; set; }
+        public static string ObjectType { get; set; }
+        public static string DisplayId { get; set; }
+        public static string Class { get; set; }
+        public static string DisplayName { get; set; }
+        public static string RemoteTextureInstance { get; set; }
+        public static string RemoteTextureID { get; set; }
+        public static string TextureFile { get; set; }
+        public static string TextureIndex { get; set; }
+        public static int SlotType { get; set; }
+        public static int Tier { get; set; }
+        public static string Description { get; set; }
+        public static int RateOfFire { get; set; }
+        public static int BagType { get; set; }
 
-        public Item(ItemCreatorForm itemCreatorForm)
+        public static void Serialize()
         {
-            this.itemCreatorForm = itemCreatorForm;
-        }
-
-        public string ObjectId { get; set; }
-        public string ObjectType { get; set; }
-        public string DisplayId { get; set; }
-        public string Class { get; set; }
-        public string DisplayName { get; set; }
-        public string RemoteTextureInstance { get; set; }
-        public string RemoteTextureId { get; set; }
-        public string TextureFile { get; set; }
-        public string TextureIndex { get; set; }
-        public int SlotType { get; set; }
-        public int Tier { get; set; }
-        public string Description { get; set; }
-        public int RateOfFire { get; set; }
-        public int BagType { get; set; }
-
-        public void Serialize()
-        {
-            // This is the XML Document which we are writing to.
-            var doc = new XmlDocument();
-            doc.AppendChild(doc.CreateXmlDeclaration("1.0", "utf-8", null));
-            var root = doc.CreateElement("Object");
-
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(1033);
-            var command = doc.CreateComment("Generated on " + DateTime.Today.ToShortDateString() + " at " + DateTime.Now.ToShortTimeString());
-            doc.AppendChild(command);
-
-            var objectType = doc.CreateAttribute("type");
-            objectType.Value = ObjectType;
-            root.Attributes.Append(objectType);
-
-            var objectId = doc.CreateAttribute("id");
-            objectId.Value = ObjectId;
-            root.Attributes.Append(objectId);
-
-            var @class = doc.CreateElement("Class"); // @class because "class" is a keyword
-            @class.InnerText = Class;
-            root.AppendChild(@class);
-
-            var isItem = doc.CreateElement("Item");
-            root.AppendChild(isItem);
-
-            if (itemCreatorForm.RemoteTexture)
+            ItemCreatorForm form = new ItemCreatorForm();
+            try
             {
-                var remoteTexture = doc.CreateElement("RemoteTexture");
-                var rtInstance = doc.CreateElement("Instance");
-                var rtId = doc.CreateElement("Id");
+                // This is the XML Document which we are writing to.
+                var doc = new XmlDocument();
 
-                rtInstance.InnerText = RemoteTextureInstance;
-                rtId.InnerText = RemoteTextureId;
+                var _object = doc.CreateElement("Object"); // @object because "object" is a keyword
 
-                remoteTexture.AppendChild(rtInstance);
-                remoteTexture.AppendChild(rtId);
+                Thread.CurrentThread.CurrentCulture = new CultureInfo(1033);
+                var _command = doc.CreateComment("Generated on " + DateTime.Today.ToShortDateString() + " at " + DateTime.Now.ToShortTimeString());
+                doc.AppendChild(_command);
 
-                root.AppendChild(remoteTexture);
+                var _objectType = doc.CreateAttribute("type");
+                _objectType.Value = ObjectType;
+                _object.Attributes.Append(_objectType);
+
+                var _objectId = doc.CreateAttribute("id");
+                _objectId.Value = ObjectId;
+                _object.Attributes.Append(_objectId);
+
+                var _class = doc.CreateElement("Class"); // @class because "class" is a keyword
+                _class.InnerText = Class;
+                _object.AppendChild(_class);
+
+                var _isItem = doc.CreateElement("Item");
+                _object.AppendChild(_isItem);
+
+                if (ItemCreatorForm.remoteTexture)
+                {
+                    var _remoteTexture = doc.CreateElement("RemoteTexture");
+                    var _rtInstance = doc.CreateElement("Instance");
+                    var _rtId = doc.CreateElement("Id");
+
+                    _rtInstance.InnerText = RemoteTextureInstance;
+                    _rtId.InnerText = RemoteTextureID;
+
+                    _remoteTexture.AppendChild(_rtInstance);
+                    _remoteTexture.AppendChild(_rtId);
+
+                    _object.AppendChild(_remoteTexture);
+                }
+                else if (!ItemCreatorForm.remoteTexture)
+                {
+                    var _texture = doc.CreateElement("Texture");
+                    var _tFile = doc.CreateElement("File");
+                    var _tIndex = doc.CreateElement("Index");
+
+                    _tFile.InnerText = TextureFile;
+                    _tIndex.InnerText = TextureIndex;
+
+                    _texture.AppendChild(_tFile);
+                    _texture.AppendChild(_tIndex);
+
+                    _object.AppendChild(_texture);
+                }
+
+                var _slotType = doc.CreateElement("SlotType");
+                _slotType.InnerText = SlotType.ToString();
+                _object.AppendChild(_slotType);
+
+                var _tier = doc.CreateElement("Tier");
+                _tier.InnerText = Tier == -1 ? "UT" : Tier.ToString();
+                _object.AppendChild(_tier);
+
+                var _description = doc.CreateElement("Description");
+                _description.InnerText = Description;
+                _object.AppendChild(_description);
+
+                var _rateOfFire = doc.CreateElement("RateOfFire");
+                _rateOfFire.InnerText = RateOfFire.ToString();
+                _object.AppendChild(_rateOfFire);
+
+                var _sound = doc.CreateElement("sound");
+                _sound.InnerText = "weapon/blunt_sword";
+                _object.AppendChild(_sound);
+
+                var _bagType = doc.CreateElement("BagType");
+                _bagType.InnerText = BagType.ToString();
+                _object.AppendChild(_bagType);
+
+                var _oldSound = doc.CreateElement("OldSound");
+                _oldSound.InnerText = "bladeSwing";
+                _object.AppendChild(_oldSound);
+
+                var _displayId = doc.CreateElement("DisplayId");
+                _displayId.InnerText = DisplayName;
+                _object.AppendChild(_displayId);
+
+                doc.AppendChild(_object);
+
+                var writer = new StringWriter();
+                doc.Save(writer);
+
+                var desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                var fullFileName = Path.Combine(desktopFolder, "Generated Item.xml");
+
+                var dlr = MessageBox.Show(writer.ToString(), "Finished XML", MessageBoxButtons.YesNo);
+                if (dlr == DialogResult.Yes)
+                {
+                    MessageBox.Show("Saving generated XML file to \r\n" + fullFileName);
+                    doc.Save(fullFileName);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var texture = doc.CreateElement("Texture");
-                var tFile = doc.CreateElement("File");
-                var tIndex = doc.CreateElement("Index");
-
-                tFile.InnerText = TextureFile;
-                tIndex.InnerText = TextureIndex;
-
-                texture.AppendChild(tFile);
-                texture.AppendChild(tIndex);
-
-                root.AppendChild(texture);
+                MessageBox.Show(ex.ToString(), caption: "Error");
             }
-
-            var slotType = doc.CreateElement("SlotType");
-            slotType.InnerText = SlotType.ToString();
-            root.AppendChild(slotType);
-
-            var tier = doc.CreateElement("Tier");
-            tier.InnerText = Tier == -1 ? "UT" : Tier.ToString();
-            root.AppendChild(tier);
-
-            var description = doc.CreateElement("Description");
-            description.InnerText = Description;
-            root.AppendChild(description);
-
-            var rateOfFire = doc.CreateElement("RateOfFire");
-            rateOfFire.InnerText = RateOfFire.ToString();
-            root.AppendChild(rateOfFire);
-
-            var sound = doc.CreateElement("sound");
-            sound.InnerText = "weapon/blunt_sword";
-            root.AppendChild(sound);
-
-            var bagType = doc.CreateElement("BagType");
-            bagType.InnerText = BagType.ToString();
-            root.AppendChild(bagType);
-
-            var oldSound = doc.CreateElement("OldSound");
-            oldSound.InnerText = "bladeSwing";
-            root.AppendChild(oldSound);
-
-            var displayId = doc.CreateElement("DisplayId");
-            displayId.InnerText = DisplayName;
-            root.AppendChild(displayId);
-
-            doc.AppendChild(root);
-
-            var writer = new StringWriter();
-            doc.Save(writer);
-
-            var desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            var fullFileName = Path.Combine(desktopFolder, "Generated Item.xml");
-
-            var dlr = MessageBox.Show(writer.ToString(), "Finished XML", MessageBoxButtons.YesNo);
-            if (dlr != DialogResult.Yes) return;
-            MessageBox.Show("Saving generated XML file to \r\n" + fullFileName);
-            doc.Save(fullFileName);
         }
     }
 }

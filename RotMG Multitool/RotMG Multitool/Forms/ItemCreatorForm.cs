@@ -1,75 +1,54 @@
-﻿using System;
-using System.Windows.Forms;
-using MetroFramework;
-using MetroFramework.Forms;
+﻿using MetroFramework.Forms;
 using RotMG_Multitool.Serializers;
+using System;
+using System.Windows.Forms;
 
-namespace RotMG_Multitool.Forms
+namespace RotMG_Multitool
 {
     public partial class ItemCreatorForm : MetroForm
     {
-        private readonly Item serializer;
-
         public ItemCreatorForm()
         {
             InitializeComponent();
-            serializer = new Item(this);
-            RemoteTexture = true;
         }
 
-        public bool RemoteTexture { get; set; }
+        public static bool remoteTexture = true;
 
         private void createXMLButton_Click(object sender, EventArgs e)
         {
             try
             {
-                if (updateThings())
-                    serializer.Serialize();
+                UpdateThings();
+                Item.Serialize();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error");
+                MessageBox.Show(ex.ToString(), caption: "Error");
             }
         }
 
-        private bool updateThings()
+        private void UpdateThings()
         {
             try
             {
-                serializer.ObjectType = objectTypeText.Text;
-                serializer.ObjectId = objectIdText.Text;
-                serializer.Class = classText.Text;
-                serializer.DisplayName = displayNameText.Text;
-                serializer.RemoteTextureInstance = rtextureInstanceText.Text;
-                serializer.RemoteTextureId = rtextureIdText.Text;
-                serializer.TextureFile = textureFileText.Text;
-                serializer.TextureIndex = textureIndexText.Text;
-                serializer.SlotType = getSlotTypeFromItem(slotTypeCombobox.Text);
-                int tier;
-                if (!int.TryParse(tierText.Text, out tier))
-                {
-                    MetroMessageBox.Show(this, "Invalid value for \"Tier\"", "Invalid Integer", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    return false;
-                }
-                serializer.Tier = tier;
-                serializer.Description = descriptionText.Text;
-                int rateOfFire;
-                if (!int.TryParse(rateOfFireText.Text, out rateOfFire))
-                {
-                    MetroMessageBox.Show(this, "Invalid value for \"Rate of Fire\"", "Invalid Integer", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    return false;
-                }
-                serializer.RateOfFire = rateOfFire;
-                serializer.BagType = getBagTypeFromType(bagTypeCombobox.Text);
+                Item.ObjectType = objectTypeText.Text;
+                Item.ObjectId = objectIdText.Text;
+                Item.Class = classText.Text;
+                Item.DisplayName = displayNameText.Text;
+                Item.RemoteTextureInstance = rtextureInstanceText.Text;
+                Item.RemoteTextureID = rtextureIdText.Text;
+                Item.TextureFile = textureFileText.Text;
+                Item.TextureIndex = textureIndexText.Text;
+                Item.SlotType = GetSlotTypeFromItem(slotTypeCombobox.Text);
+                Item.Tier = int.Parse(tierText.Text);
+                Item.Description = descriptionText.Text;
+                Item.RateOfFire = int.Parse(rateOfFireText.Text);
+                Item.BagType = GetBagTypeFromType(bagTypeCombobox.Text);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error");
-                return false;
+                MessageBox.Show(ex.ToString(), caption: "Error");
             }
-            return true;
         }
 
         private void textureButton_Click(object sender, EventArgs e)
@@ -84,7 +63,7 @@ namespace RotMG_Multitool.Forms
                 rtextureInstanceText.Hide();
                 warningLabel.Hide();
 
-                RemoteTexture = false;
+                remoteTexture = false;
             }
             else
             {
@@ -96,11 +75,11 @@ namespace RotMG_Multitool.Forms
                 textureFileText.Hide();
                 textureIndexText.Hide();
 
-                RemoteTexture = true;
+                remoteTexture = true;
             }
         }
 
-        private static int getSlotTypeFromItem(string item)
+        private int GetSlotTypeFromItem(string item)
         {
             switch (item)
             {
@@ -113,7 +92,7 @@ namespace RotMG_Multitool.Forms
             }
         }
 
-        private static int getBagTypeFromType(string bagtype)
+        private int GetBagTypeFromType(string bagtype)
         {
             switch (bagtype)
             {

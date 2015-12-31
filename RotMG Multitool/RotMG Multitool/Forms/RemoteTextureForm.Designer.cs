@@ -1,6 +1,6 @@
-﻿namespace RotMG_Multitool.Forms
+﻿namespace RotMG_Multitool
 {
-    partial class RemoteTextureForm
+    partial class remoteTextureForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,9 +30,9 @@
         {
             this.listOfName = new System.Windows.Forms.ListView();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
-            this.textBox1 = new MetroFramework.Controls.MetroTextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new MetroFramework.Controls.MetroTextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.metroButton2 = new MetroFramework.Controls.MetroButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.metroButton3 = new MetroFramework.Controls.MetroButton();
@@ -144,7 +144,7 @@
             this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.listOfName);
             this.MaximizeBox = false;
-            this.Name = "RemoteTextureForm";
+            this.Name = "remoteTextureForm";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Purple;
             this.Text = "Remote Texture Grabber";
@@ -158,9 +158,9 @@
 
         private System.Windows.Forms.ListView listOfName;
         private MetroFramework.Controls.MetroButton metroButton1;
-        private MetroFramework.Controls.MetroTextBox textBox1;
+        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
-        private MetroFramework.Controls.MetroTextBox textBox2;
+        private System.Windows.Forms.TextBox textBox2;
         private MetroFramework.Controls.MetroButton metroButton2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private InterpolatedBox pictureBox1;

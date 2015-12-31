@@ -1,4 +1,4 @@
-﻿namespace RotMG_Multitool.Forms
+﻿namespace RotMG_Multitool
 {
     partial class HomeForm
     {

@@ -1,7 +1,7 @@
-﻿using System;
-using MetroFramework.Forms;
+﻿using MetroFramework.Forms;
+using System;
 
-namespace RotMG_Multitool.Forms
+namespace RotMG_Multitool
 {
     public partial class HomeForm : MetroForm
     {
@@ -12,19 +12,19 @@ namespace RotMG_Multitool.Forms
 
         private void itemCreatorButton_Click(object sender, EventArgs e)
         {
-            var form = new ItemCreatorForm();
+            ItemCreatorForm form = new ItemCreatorForm();
             form.ShowDialog();
         }
 
         private void enemyCreatorButton_Click(object sender, EventArgs e)
         {
-            var form = new EnemyCreatorForm();
+            enemyCreatorForm form = new enemyCreatorForm();
             form.ShowDialog();
         }
 
         private void remoteTextureButton_Click(object sender, EventArgs e)
         {
-            var form = new RemoteTextureForm();
+            remoteTextureForm form = new remoteTextureForm();
             form.ShowDialog();
         }
     }
