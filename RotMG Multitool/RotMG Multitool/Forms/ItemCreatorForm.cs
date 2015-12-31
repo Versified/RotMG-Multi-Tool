@@ -7,6 +7,8 @@ namespace RotMG_Multitool
 {
     public partial class ItemCreatorForm : MetroForm
     {
+        Item item = new Item();
+
         public ItemCreatorForm()
         {
             InitializeComponent();
@@ -18,8 +20,8 @@ namespace RotMG_Multitool
         {
             try
             {
-                UpdateThings();
-                Item.Serialize();
+                setPropertyValues();
+                item.Serialize();
             }
             catch (Exception ex)
             {
@@ -27,23 +29,23 @@ namespace RotMG_Multitool
             }
         }
 
-        private void UpdateThings()
+        private void setPropertyValues()
         {
             try
             {
-                Item.ObjectType = objectTypeText.Text;
-                Item.ObjectId = objectIdText.Text;
-                Item.Class = classText.Text;
-                Item.DisplayName = displayNameText.Text;
-                Item.RemoteTextureInstance = rtextureInstanceText.Text;
-                Item.RemoteTextureID = rtextureIdText.Text;
-                Item.TextureFile = textureFileText.Text;
-                Item.TextureIndex = textureIndexText.Text;
-                Item.SlotType = GetSlotTypeFromItem(slotTypeCombobox.Text);
-                Item.Tier = int.Parse(tierText.Text);
-                Item.Description = descriptionText.Text;
-                Item.RateOfFire = int.Parse(rateOfFireText.Text);
-                Item.BagType = GetBagTypeFromType(bagTypeCombobox.Text);
+                item.ObjectType = objectTypeText.Text;
+                item.ObjectId = objectIdText.Text;
+                item.Class = classText.Text;
+                item.DisplayName = displayNameText.Text;
+                item.RemoteTextureInstance = rtextureInstanceText.Text;
+                item.RemoteTextureID = rtextureIdText.Text;
+                item.TextureFile = textureFileText.Text;
+                item.TextureIndex = textureIndexText.Text;
+                item.SlotType = GetSlotTypeFromItem(slotTypeCombobox.Text);
+                item.Tier = int.Parse(tierText.Text);
+                item.Description = descriptionText.Text;
+                item.RateOfFire = int.Parse(rateOfFireText.Text);
+                item.BagType = GetBagTypeFromType(bagTypeCombobox.Text);
             }
             catch (Exception ex)
             {
