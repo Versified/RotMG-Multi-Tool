@@ -1,8 +1,8 @@
-﻿using MetroFramework.Controls;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
+using MetroFramework.Controls;
 
-namespace RotMG_Multitool
+namespace RotMG_Multitool.Forms
 {
     partial class ItemCreatorForm
     {

@@ -1,6 +1,6 @@
-﻿namespace RotMG_Multitool
+﻿namespace RotMG_Multitool.Forms
 {
-    partial class enemyCreatorForm
+    partial class EnemyCreatorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -37,7 +37,7 @@
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(300, 300);
             this.MaximizeBox = false;
-            this.Name = "enemyCreatorForm";
+            this.Name = "EnemyCreatorForm";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Purple;
             this.Text = "Enemy Creator";
