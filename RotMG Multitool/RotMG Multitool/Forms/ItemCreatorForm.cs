@@ -8,7 +8,11 @@ namespace RotMG_Multitool.Forms
 {
     public partial class ItemCreatorForm : MetroForm
     {
+<<<<<<< HEAD
         private readonly Item serializer;
+=======
+        Item item = new Item();
+>>>>>>> origin/master
 
         public ItemCreatorForm()
         {
@@ -23,8 +27,13 @@ namespace RotMG_Multitool.Forms
         {
             try
             {
+<<<<<<< HEAD
                 if (updateThings())
                     serializer.Serialize();
+=======
+                setPropertyValues();
+                item.Serialize();
+>>>>>>> origin/master
             }
             catch (Exception ex)
             {
@@ -32,6 +41,7 @@ namespace RotMG_Multitool.Forms
             }
         }
 
+<<<<<<< HEAD
         private bool updateThings()
         {
             try
@@ -63,6 +73,25 @@ namespace RotMG_Multitool.Forms
                 }
                 serializer.RateOfFire = rateOfFire;
                 serializer.BagType = getBagTypeFromType(bagTypeCombobox.Text);
+=======
+        private void setPropertyValues()
+        {
+            try
+            {
+                item.ObjectType = objectTypeText.Text;
+                item.ObjectId = objectIdText.Text;
+                item.Class = classText.Text;
+                item.DisplayName = displayNameText.Text;
+                item.RemoteTextureInstance = rtextureInstanceText.Text;
+                item.RemoteTextureID = rtextureIdText.Text;
+                item.TextureFile = textureFileText.Text;
+                item.TextureIndex = textureIndexText.Text;
+                item.SlotType = GetSlotTypeFromItem(slotTypeCombobox.Text);
+                item.Tier = int.Parse(tierText.Text);
+                item.Description = descriptionText.Text;
+                item.RateOfFire = int.Parse(rateOfFireText.Text);
+                item.BagType = GetBagTypeFromType(bagTypeCombobox.Text);
+>>>>>>> origin/master
             }
             catch (Exception ex)
             {
