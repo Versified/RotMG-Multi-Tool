@@ -49,6 +49,8 @@ namespace RotMG_Multitool.Forms
             this.descriptionText = new System.Windows.Forms.TextBox();
             this.rateOfFireText = new System.Windows.Forms.TextBox();
             this.bagTypeCombobox = new MetroFramework.Controls.MetroComboBox();
+            this.metroUserControl1 = new MetroFramework.Controls.MetroUserControl();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // objectTypeText
@@ -216,10 +218,31 @@ namespace RotMG_Multitool.Forms
             this.bagTypeCombobox.TabIndex = 16;
             this.bagTypeCombobox.UseSelectable = true;
             // 
+            // metroUserControl1
+            // 
+            this.metroUserControl1.Location = new System.Drawing.Point(172, 16);
+            this.metroUserControl1.Name = "metroUserControl1";
+            this.metroUserControl1.Size = new System.Drawing.Size(8, 8);
+            this.metroUserControl1.TabIndex = 17;
+            this.metroUserControl1.UseSelectable = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.White;
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(11, 92);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 13);
+            this.label2.TabIndex = 35;
+            this.label2.Text = "Don\'t change this";
+            // 
             // ItemCreatorForm
             // 
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(376, 360);
+            this.ClientSize = new System.Drawing.Size(340, 317);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.metroUserControl1);
             this.Controls.Add(this.bagTypeCombobox);
             this.Controls.Add(this.rateOfFireText);
             this.Controls.Add(this.descriptionText);
@@ -243,7 +266,6 @@ namespace RotMG_Multitool.Forms
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Purple;
             this.Text = "Item Creator";
-            this.Load += new System.EventHandler(this.ItemCreatorForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -267,5 +289,7 @@ namespace RotMG_Multitool.Forms
         public TextBox descriptionText;
         public TextBox rateOfFireText;
         private MetroComboBox bagTypeCombobox;
+        private MetroUserControl metroUserControl1;
+        private Label label2;
     }
 }

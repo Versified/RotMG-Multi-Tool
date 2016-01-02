@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using MetroFramework.Forms;
 using Microsoft.VisualBasic;
+using MetroFramework;
 
 namespace RotMG_Multitool.Forms
 {
@@ -25,8 +26,10 @@ namespace RotMG_Multitool.Forms
         {
             if (textBox1.Text != string.Empty)
             {
-                hasClicked = true;
                 listOfName.Clear();
+
+                hasClicked = true;
+
                 var wc = new WebClient();
                 var result = wc.DownloadString("http://realmofthemadgod.appspot.com/picture/list?num=" + perPage + "&tags=" + textBox1.Text);
 
@@ -45,7 +48,7 @@ namespace RotMG_Multitool.Forms
                 listOfName.Items.CopyTo(realItems, 0);
             }
             else
-                MessageBox.Show("You must enter a tag to search for first", "Silly you");
+                MetroMessageBox.Show(this, "You must enter a tag to search for first", "Silly you", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         public class Picture
@@ -87,18 +90,18 @@ namespace RotMG_Multitool.Forms
             }
             else
             {
-                MessageBox.Show("You must choose an image to save first", "Silly you");
+                MetroMessageBox.Show(this, "You must choose an image to save first", "Silly you", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
         private void metroButton3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Special Thanks to Travoos");
+            MetroMessageBox.Show(this, "Special Thanks to Travoos", "Thanks", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void metroButton4_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Here you can set how many objects appear");
+            MetroMessageBox.Show(this, "Here you can set how many objects appear", "Input Value");
             var howManyPerPage = Interaction.InputBox("How many objects to show (Don't go overboard or R.I.P)", "Configuration", "200", -1, -1);
             int val;
             if (Int32.TryParse(howManyPerPage, out val))

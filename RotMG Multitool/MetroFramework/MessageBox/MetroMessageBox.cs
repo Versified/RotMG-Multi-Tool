@@ -107,7 +107,12 @@ namespace MetroFramework
         public static DialogResult Show(IWin32Window owner, String message, String title, MessageBoxButtons buttons, MessageBoxIcon icon, int height)
         { return Show(owner, message, title, buttons, icon, MessageBoxDefaultButton.Button1, height); }
 
-           /// <summary>
+        public static void Show()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Shows a metro-styles message notification into the specified owner window.
         /// </summary>
         /// <param name="owner"></param>

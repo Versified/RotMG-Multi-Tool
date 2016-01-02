@@ -1,7 +1,7 @@
-﻿using MetroFramework.Forms;
-using System;
+﻿using System;
+using MetroFramework.Forms;
 
-namespace RotMG_Multitool
+namespace RotMG_Multitool.Forms
 {
     public partial class HomeForm : MetroForm
     {
@@ -12,26 +12,20 @@ namespace RotMG_Multitool
 
         private void itemCreatorButton_Click(object sender, EventArgs e)
         {
-            ItemCreatorForm form = new ItemCreatorForm();
+            var form = new ItemCreatorForm();
             form.ShowDialog();
         }
 
         private void enemyCreatorButton_Click(object sender, EventArgs e)
         {
-            EnemyCreatorForm form = new EnemyCreatorForm();
+            var form = new EnemyCreatorForm();
             form.ShowDialog();
         }
 
         private void remoteTextureButton_Click(object sender, EventArgs e)
         {
-            remoteTextureForm form = new remoteTextureForm();
+            var form = new RemoteTextureForm();
             form.ShowDialog();
-        }
-
-        private void metroButton1_Click(object sender, EventArgs e)
-        {
-            //TODO: Make BehaviorSnippet form appear and shite :)
-
         }
     }
 }
