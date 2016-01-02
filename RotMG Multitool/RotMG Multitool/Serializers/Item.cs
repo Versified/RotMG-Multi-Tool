@@ -29,7 +29,7 @@ namespace RotMG_Multitool.Serializers
             // This is the XML Document which we are writing to.
             var xmlDocument = new XmlDocument();
 
-            var root = xmlDocument.CreateElement("Object"); // @object because "object" is a keyword
+            var root = xmlDocument.CreateElement("Object");
 
             Thread.CurrentThread.CurrentCulture = new CultureInfo(1033);
             var comment = xmlDocument.CreateComment("Generated on " + DateTime.Today.ToShortDateString() + " at " + DateTime.Now.ToShortTimeString());

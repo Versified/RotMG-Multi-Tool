@@ -219,7 +219,7 @@ namespace RotMG_Multitool
             // ItemCreatorForm
             // 
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(340, 318);
+            this.ClientSize = new System.Drawing.Size(376, 360);
             this.Controls.Add(this.bagTypeCombobox);
             this.Controls.Add(this.rateOfFireText);
             this.Controls.Add(this.descriptionText);
@@ -243,6 +243,7 @@ namespace RotMG_Multitool
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Purple;
             this.Text = "Item Creator";
+            this.Load += new System.EventHandler(this.ItemCreatorForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

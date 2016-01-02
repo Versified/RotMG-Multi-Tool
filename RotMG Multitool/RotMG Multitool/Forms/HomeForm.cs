@@ -18,7 +18,7 @@ namespace RotMG_Multitool
 
         private void enemyCreatorButton_Click(object sender, EventArgs e)
         {
-            enemyCreatorForm form = new enemyCreatorForm();
+            EnemyCreatorForm form = new EnemyCreatorForm();
             form.ShowDialog();
         }
 
@@ -26,6 +26,12 @@ namespace RotMG_Multitool
         {
             remoteTextureForm form = new remoteTextureForm();
             form.ShowDialog();
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            //TODO: Make BehaviorSnippet form appear and shite :)
+
         }
     }
 }

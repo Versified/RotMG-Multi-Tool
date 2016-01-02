@@ -85,6 +85,7 @@
     <Compile Include="Forms\RemoteTextureForm.Designer.cs">
       <DependentUpon>RemoteTextureForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Serializers\Enemy.cs" />
     <Compile Include="Serializers\Item.cs" />
     <EmbeddedResource Include="Forms\EnemyCreatorForm.resx">
       <DependentUpon>EnemyCreatorForm.cs</DependentUpon>

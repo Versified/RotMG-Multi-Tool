@@ -106,5 +106,10 @@ namespace RotMG_Multitool
                 default: return 4;
             }
         }
+
+        private void ItemCreatorForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
