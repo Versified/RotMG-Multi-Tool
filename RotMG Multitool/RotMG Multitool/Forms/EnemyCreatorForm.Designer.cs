@@ -1,4 +1,4 @@
-﻿namespace RotMG_Multitool
+﻿namespace RotMG_Multitool.Forms
 {
     partial class EnemyCreatorForm
     {
