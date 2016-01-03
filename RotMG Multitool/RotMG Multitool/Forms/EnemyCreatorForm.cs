@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
-using MetroFramework;
+﻿using MetroFramework;
 using MetroFramework.Forms;
 using RotMG_Multitool.Serializers;
+using System;
+using System.Windows.Forms;
 
 namespace RotMG_Multitool.Forms
 {

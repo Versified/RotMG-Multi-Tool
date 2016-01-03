@@ -1,43 +1,44 @@
-﻿/**
- * MetroFramework - Modern UI for WinForms
- * 
- * The MIT License (MIT)
- * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
- * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
-
-using MetroFramework.Animation;
+﻿using MetroFramework.Animation;
 using MetroFramework.Components;
 using MetroFramework.Controls;
 using MetroFramework.Drawing;
 using MetroFramework.Interfaces;
 using MetroFramework.Native;
 
+/**
+ * MetroFramework - Modern UI for WinForms
+ *
+ * The MIT License (MIT)
+ * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the
+ * following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
 namespace MetroFramework.Forms
 {
     public sealed class MetroTaskWindow : MetroForm
     {
         private static MetroTaskWindow singletonWindow;
+
         public static void ShowTaskWindow(IWin32Window parent, string title, Control userControl, int secToClose)
         {
             if (singletonWindow != null)
@@ -52,7 +53,7 @@ namespace MetroFramework.Forms
             singletonWindow.Resizable = false;
             singletonWindow.Movable = true;
             singletonWindow.StartPosition = FormStartPosition.Manual;
-            
+
             if (parent != null && parent is IMetroForm)
             {
                 singletonWindow.Theme = ((IMetroForm)parent).Theme;
@@ -101,6 +102,7 @@ namespace MetroFramework.Forms
         }
 
         private bool cancelTimer = false;
+
         public bool CancelTimer
         {
             get { return cancelTimer; }
@@ -131,8 +133,8 @@ namespace MetroFramework.Forms
                 timer = DelayedCall.Start(UpdateProgress, 5);
         }
 
-
         private bool isInitialized = false;
+
         protected override void OnActivated(EventArgs e)
         {
             if (!isInitialized)
@@ -155,15 +157,19 @@ namespace MetroFramework.Forms
                     case TaskbarPosition.Left:
                         Location = new Point(myTaskbar.Bounds.Width + 5, myTaskbar.Bounds.Height - Height - 5);
                         break;
+
                     case TaskbarPosition.Top:
                         Location = new Point(myTaskbar.Bounds.Width - Width - 5, myTaskbar.Bounds.Height + 5);
                         break;
+
                     case TaskbarPosition.Right:
                         Location = new Point(myTaskbar.Bounds.X - Width - 5, myTaskbar.Bounds.Height - Height - 5);
                         break;
+
                     case TaskbarPosition.Bottom:
                         Location = new Point(myTaskbar.Bounds.Width - Width - 5, myTaskbar.Bounds.Y - Height - 5);
                         break;
+
                     case TaskbarPosition.Unknown:
                     default:
                         Location = new Point(Screen.PrimaryScreen.Bounds.Width - Width - 5, Screen.PrimaryScreen.Bounds.Height - Height - 5);
@@ -220,7 +226,7 @@ namespace MetroFramework.Forms
 
             double perc = (double)elapsedTime / ((double)closeTime / 100);
             progressWidth = (int)((double)Width * (perc / 100));
-            Invalidate(new Rectangle(0,0,Width,5));
+            Invalidate(new Rectangle(0, 0, Width, 5));
 
             if (!cancelTimer)
                 timer.Reset();

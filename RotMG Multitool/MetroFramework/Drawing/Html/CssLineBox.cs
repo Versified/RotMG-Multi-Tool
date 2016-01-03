@@ -1,32 +1,32 @@
 /**
  * A Professional HTML Renderer You Will Use
- * 
+ *
  * The BSD License (BSD)
  * Copyright (c) 2011 Jose Menendez Póo, http://www.codeproject.com/Articles/32376/A-Professional-HTML-Renderer-You-Will-Use
- * 
- * Redistribution and use in source and binary forms, with or without modification, are 
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
  * permitted provided that the following conditions are met:
- * 
- * Redistributions of source code must retain the above copyright notice, this list of 
+ *
+ * Redistributions of source code must retain the above copyright notice, this list of
  * conditions and the following disclaimer.
- * 
- * Redistributions in binary form must reproduce the above copyright notice, this list of 
- * conditions and the following disclaimer in the documentation and/or other materials 
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this list of
+ * conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED 
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 
 namespace MetroFramework.Drawing.Html
@@ -40,7 +40,6 @@ namespace MetroFramework.Drawing.Html
     /// </remarks>
     internal class CssLineBox
     {
-
         #region Fields
 
         private List<CssBoxWord> _words;
@@ -48,7 +47,7 @@ namespace MetroFramework.Drawing.Html
         private Dictionary<CssBox, RectangleF> _rects;
         private List<CssBox> _relatedBoxes;
 
-        #endregion
+        #endregion Fields
 
         #region Ctors
 
@@ -64,21 +63,18 @@ namespace MetroFramework.Drawing.Html
             _ownerBox.LineBoxes.Add(this);
         }
 
-        #endregion
+        #endregion Ctors
 
         #region Props
 
-        
-
         /// <summary>
-        /// Gets a list of boxes related with the linebox. 
+        /// Gets a list of boxes related with the linebox.
         /// To know the words of the box inside this linebox, use the <see cref="WordsOf"/> method.
         /// </summary>
         public List<CssBox> RelatedBoxes
         {
             get { return _relatedBoxes; }
         }
-
 
         /// <summary>
         /// Gets the words inside the linebox
@@ -104,13 +100,10 @@ namespace MetroFramework.Drawing.Html
             get { return _rects; }
         }
 
-
-        #endregion
+        #endregion Props
 
         #region Methods
 
-
-       
         /// <summary>
         /// Gets the maximum bottom of the words
         /// </summary>
@@ -127,7 +120,7 @@ namespace MetroFramework.Drawing.Html
             return res;
         }
 
-        #endregion
+        #endregion Methods
 
         /// <summary>
         /// Lets the linebox add the word an its box to their lists if necessary.
@@ -184,7 +177,6 @@ namespace MetroFramework.Drawing.Html
                 y -= topspacing;
                 b += bottomspacing;
             }
-            
 
             if (!Rectangles.ContainsKey(box))
             {
@@ -223,7 +215,7 @@ namespace MetroFramework.Drawing.Html
         {
             foreach (CssBox b in Rectangles.Keys)
             {
-                if (float.IsInfinity(Rectangles[b].Width)) 
+                if (float.IsInfinity(Rectangles[b].Width))
                     continue;
                 g.FillRectangle(new SolidBrush(Color.FromArgb(50, Color.Black)),
                     Rectangle.Round(Rectangles[b]));
@@ -250,7 +242,7 @@ namespace MetroFramework.Drawing.Html
         /// <param name="g">Device info</param>
         /// <param name="b">box to check words</param>
         /// <param name="baseline">baseline</param>
-        internal void SetBaseLine(Graphics g,CssBox b, float baseline)
+        internal void SetBaseLine(Graphics g, CssBox b, float baseline)
         {
             //TODO: Aqui me quede, checar poniendo "by the" con un font-size de 3em
             List<CssBoxWord> ws = WordsOf(b);

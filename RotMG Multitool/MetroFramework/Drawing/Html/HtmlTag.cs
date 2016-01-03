@@ -1,32 +1,31 @@
 /**
  * A Professional HTML Renderer You Will Use
- * 
+ *
  * The BSD License (BSD)
  * Copyright (c) 2011 Jose Menendez Póo, http://www.codeproject.com/Articles/32376/A-Professional-HTML-Renderer-You-Will-Use
- * 
- * Redistribution and use in source and binary forms, with or without modification, are 
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
  * permitted provided that the following conditions are met:
- * 
- * Redistributions of source code must retain the above copyright notice, this list of 
+ *
+ * Redistributions of source code must retain the above copyright notice, this list of
  * conditions and the following disclaimer.
- * 
- * Redistributions in binary form must reproduce the above copyright notice, this list of 
- * conditions and the following disclaimer in the documentation and/or other materials 
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this list of
+ * conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED 
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-using System;
+
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace MetroFramework.Drawing.Html
@@ -39,7 +38,7 @@ namespace MetroFramework.Drawing.Html
         private bool _isClosing;
         private Dictionary<string, string> _attributes;
 
-        #endregion
+        #endregion Fields
 
         #region Ctor
 
@@ -84,7 +83,7 @@ namespace MetroFramework.Drawing.Html
 
                 if (chunks.Length == 1)
                 {
-                    if(!Attributes.ContainsKey(chunks[0]))
+                    if (!Attributes.ContainsKey(chunks[0]))
                         Attributes.Add(chunks[0].ToLower(), string.Empty);
                 }
                 else if (chunks.Length == 2)
@@ -103,7 +102,7 @@ namespace MetroFramework.Drawing.Html
             }
         }
 
-        #endregion
+        #endregion Ctor
 
         #region Props
 
@@ -114,7 +113,6 @@ namespace MetroFramework.Drawing.Html
         {
             get { return _attributes; }
         }
-
 
         /// <summary>
         /// Gets the name of this tag
@@ -133,7 +131,7 @@ namespace MetroFramework.Drawing.Html
         }
 
         /// <summary>
-        /// Gets if the tag is single placed; in other words it doesn't need a closing tag; 
+        /// Gets if the tag is single placed; in other words it doesn't need a closing tag;
         /// e.g. &lt;br&gt;
         /// </summary>
         public bool IsSingle
@@ -168,15 +166,18 @@ namespace MetroFramework.Drawing.Html
                         else
                             box.VerticalAlign = value;
                         break;
+
                     case HtmlConstants.background:
-                            box.BackgroundImage = value;
+                        box.BackgroundImage = value;
                         break;
+
                     case HtmlConstants.bgcolor:
                         box.BackgroundColor = value;
                         break;
+
                     case HtmlConstants.border:
                         box.BorderWidth = TranslateLength(value);
-                        
+
                         if (t == HtmlConstants.TABLE)
                         {
                             ApplyTableBorder(box, value);
@@ -186,52 +187,64 @@ namespace MetroFramework.Drawing.Html
                             box.BorderStyle = CssConstants.Solid;
                         }
                         break;
+
                     case HtmlConstants.bordercolor:
                         box.BorderColor = value;
                         break;
+
                     case HtmlConstants.cellspacing:
                         box.BorderSpacing = TranslateLength(value);
                         break;
+
                     case HtmlConstants.cellpadding:
                         ApplyTablePadding(box, value);
                         break;
+
                     case HtmlConstants.color:
                         box.Color = value;
                         break;
+
                     case HtmlConstants.dir:
                         box.Direction = value;
                         break;
+
                     case HtmlConstants.face:
                         box.FontFamily = value;
                         break;
+
                     case HtmlConstants.height:
                         box.Height = TranslateLength(value);
                         break;
+
                     case HtmlConstants.hspace:
                         box.MarginRight = box.MarginLeft = TranslateLength(value);
                         break;
+
                     case HtmlConstants.nowrap:
                         box.WhiteSpace = CssConstants.Nowrap;
                         break;
+
                     case HtmlConstants.size:
                         if (t == HtmlConstants.HR)
                             box.Height = TranslateLength(value);
                         break;
+
                     case HtmlConstants.valign:
                         box.VerticalAlign = value;
                         break;
+
                     case HtmlConstants.vspace:
                         box.MarginTop = box.MarginBottom = TranslateLength(value);
                         break;
+
                     case HtmlConstants.width:
                         box.Width = TranslateLength(value);
                         break;
-
                 }
             }
         }
 
-        #endregion
+        #endregion Props
 
         #region Methods
 
@@ -280,7 +293,6 @@ namespace MetroFramework.Drawing.Html
                 foreach (CssBox cell in box.Boxes)
                 {
                     cell.Padding = TranslateLength(padding);
-
                 }
             }
         }
@@ -300,6 +312,6 @@ namespace MetroFramework.Drawing.Html
             return string.Format("<{1}{0}>", TagName, IsClosing ? "/" : string.Empty);
         }
 
-        #endregion
+        #endregion Methods
     }
 }

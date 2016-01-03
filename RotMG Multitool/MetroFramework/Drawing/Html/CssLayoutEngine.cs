@@ -1,38 +1,36 @@
 /**
  * A Professional HTML Renderer You Will Use
- * 
+ *
  * The BSD License (BSD)
  * Copyright (c) 2011 Jose Menendez Póo, http://www.codeproject.com/Articles/32376/A-Professional-HTML-Renderer-You-Will-Use
- * 
- * Redistribution and use in source and binary forms, with or without modification, are 
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
  * permitted provided that the following conditions are met:
- * 
- * Redistributions of source code must retain the above copyright notice, this list of 
+ *
+ * Redistributions of source code must retain the above copyright notice, this list of
  * conditions and the following disclaimer.
- * 
- * Redistributions in binary form must reproduce the above copyright notice, this list of 
- * conditions and the following disclaimer in the documentation and/or other materials 
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this list of
+ * conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED 
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 
 namespace MetroFramework.Drawing.Html
 {
-    
-
     /// <summary>
     /// Helps on CSS Layout
     /// </summary>
@@ -42,7 +40,7 @@ namespace MetroFramework.Drawing.Html
 
         private static CssBoxWord _lastTreatedWord = null;
 
-        #endregion
+        #endregion Fields
 
         #region Inline Boxes
 
@@ -53,7 +51,6 @@ namespace MetroFramework.Drawing.Html
         /// <param name="blockBox"></param>
         public static void CreateLineBoxes(Graphics g, CssBox blockBox)
         {
-
             blockBox.LineBoxes.Clear();
 
             float maxRight = blockBox.ActualRight - blockBox.ActualPaddingRight - blockBox.ActualBorderRightWidth;
@@ -74,12 +71,11 @@ namespace MetroFramework.Drawing.Html
             CssLineBox line = new CssLineBox(blockBox);
 
             //Flow words and boxes
-            FlowBox(g, blockBox, blockBox, maxRight, lineSpacing, startx,ref line, ref curx, ref cury, ref maxBottom);
+            FlowBox(g, blockBox, blockBox, maxRight, lineSpacing, startx, ref line, ref curx, ref cury, ref maxBottom);
 
             //Gets the rectangles foreach linebox
             foreach (CssLineBox linebox in blockBox.LineBoxes)
             {
-                
                 BubbleRectangles(blockBox, linebox);
                 linebox.AssignRectanglesToBoxes();
                 ApplyAlignment(g, linebox);
@@ -104,13 +100,12 @@ namespace MetroFramework.Drawing.Html
         /// <param name="curx">Current x coordinate that will be the left of the next word</param>
         /// <param name="cury">Current y coordinate that will be the top of the next word</param>
         /// <param name="maxbottom">Maximum bottom reached so far</param>
-        private static void FlowBox(Graphics g, CssBox blockbox, CssBox box, float maxright, float linespacing, float startx,ref CssLineBox line, ref float curx, ref float cury, ref float maxbottom)
+        private static void FlowBox(Graphics g, CssBox blockbox, CssBox box, float maxright, float linespacing, float startx, ref CssLineBox line, ref float curx, ref float cury, ref float maxbottom)
         {
             box.FirstHostingLineBox = line;
 
             foreach (CssBox b in box.Boxes)
             {
-
                 float leftspacing = b.ActualMarginLeft + b.ActualBorderLeftWidth + b.ActualPaddingLeft;
                 float rightspacing = b.ActualMarginRight + b.ActualBorderRightWidth + b.ActualPaddingRight;
                 float topspacing = b.ActualBorderTopWidth + b.ActualPaddingTop;
@@ -144,7 +139,7 @@ namespace MetroFramework.Drawing.Html
                                 curx += leftspacing;
                             }
 
-                            #endregion
+                            #endregion Break line
                         }
 
                         line.ReportExistanceOf(word);
@@ -153,16 +148,16 @@ namespace MetroFramework.Drawing.Html
                         word.Top = cury;// - word.LastMeasureOffset.Y;
 
                         curx = word.Right;// +word.SpacesAfterWidth;
-                        maxbottom = Math.Max(maxbottom, word.Bottom );//+ (word.IsImage ? topspacing + bottomspacing : 0));
+                        maxbottom = Math.Max(maxbottom, word.Bottom);//+ (word.IsImage ? topspacing + bottomspacing : 0));
 
                         _lastTreatedWord = word;
                     }
 
-                    #endregion
+                    #endregion Flow words
                 }
                 else
                 {
-                    FlowBox(g, blockbox, b, maxright, linespacing, startx,ref line, ref curx, ref cury, ref maxbottom);
+                    FlowBox(g, blockbox, b, maxright, linespacing, startx, ref line, ref curx, ref cury, ref maxbottom);
                 }
 
                 curx += rightspacing;
@@ -172,7 +167,7 @@ namespace MetroFramework.Drawing.Html
         }
 
         /// <summary>
-        /// Recursively creates the rectangles of the blockBox, by bubbling from deep to outside of the boxes 
+        /// Recursively creates the rectangles of the blockBox, by bubbling from deep to outside of the boxes
         /// in the rectangle structure
         /// </summary>
         private static void BubbleRectangles(CssBox box, CssLineBox line)
@@ -191,7 +186,7 @@ namespace MetroFramework.Drawing.Html
                         y = Math.Min(y, word.Top);
                         b = Math.Max(b, word.Bottom);
                     }
-                    line.UpdateRectangle(box, x, y, r, b); 
+                    line.UpdateRectangle(box, x, y, r, b);
                 }
             }
             else
@@ -214,7 +209,7 @@ namespace MetroFramework.Drawing.Html
             string space = " .";
             float w = 0f;
             float onError = 5f;
-            
+
             StringFormat sf = new StringFormat();
             sf.SetMeasurableCharacterRanges(new CharacterRange[] { new CharacterRange(0, 1) });
             Region[] regs = g.MeasureCharacterRanges(space, b.ActualFont, new RectangleF(0, 0, float.MaxValue, float.MaxValue), sf);
@@ -237,7 +232,6 @@ namespace MetroFramework.Drawing.Html
         /// <param name="lineBox"></param>
         private static void ApplyAlignment(Graphics g, CssLineBox lineBox)
         {
-
             #region Horizontal alignment
 
             switch (lineBox.OwnerBox.TextAlign)
@@ -245,18 +239,21 @@ namespace MetroFramework.Drawing.Html
                 case CssConstants.Right:
                     ApplyRightAlignment(g, lineBox);
                     break;
+
                 case CssConstants.Center:
                     ApplyCenterAlignment(g, lineBox);
                     break;
+
                 case CssConstants.Justify:
                     ApplyJustifyAlignment(g, lineBox);
                     break;
+
                 default:
                     ApplyLeftAlignment(g, lineBox);
                     break;
             }
 
-            #endregion
+            #endregion Horizontal alignment
 
             ApplyVerticalAlignment(g, lineBox);
         }
@@ -327,7 +324,6 @@ namespace MetroFramework.Drawing.Html
         /// <param name="lineBox"></param>
         private static void ApplyVerticalAlignment(Graphics g, CssLineBox lineBox)
         {
-
             bool isTableCell = lineBox.OwnerBox.Display == CssConstants.TableCell;
             float baseline = lineBox.GetMaxWordBottom() - GetDescent(lineBox.OwnerBox.ActualFont) - 2;
             List<CssBox> boxes = new List<CssBox>(lineBox.Rectangles.Keys);
@@ -343,24 +339,31 @@ namespace MetroFramework.Drawing.Html
                     case CssConstants.Sub:
                         lineBox.SetBaseLine(g, b, baseline + lineBox.Rectangles[b].Height * .2f);
                         break;
+
                     case CssConstants.Super:
                         lineBox.SetBaseLine(g, b, baseline - lineBox.Rectangles[b].Height * .2f);
                         break;
+
                     case CssConstants.TextTop:
 
                         break;
+
                     case CssConstants.TextBottom:
 
                         break;
+
                     case CssConstants.Top:
-                        
+
                         break;
+
                     case CssConstants.Bottom:
 
                         break;
+
                     case CssConstants.Middle:
 
                         break;
+
                     default:
                         //case: baseline
                         lineBox.SetBaseLine(g, b, baseline);
@@ -371,10 +374,7 @@ namespace MetroFramework.Drawing.Html
                 //g.FillRectangle(Brushes.Aqua, r.Left, r.Top, r.Width, ascent);
                 //g.FillRectangle(Brushes.Yellow, r.Left, r.Top + ascent, r.Width, descent);
                 //g.DrawLine(Pens.Fuchsia, r.Left, baseline, r.Right, baseline);
-
             }
-
-
         }
 
         /// <summary>
@@ -413,7 +413,6 @@ namespace MetroFramework.Drawing.Html
             //{
             //    for (int i = 0; i < line.RelatedBoxes.Count; i++)
             //    {
-
             //        float diff = bottom - line.RelatedBoxes[i].Rectangles[line].Bottom;
             //        if (middle) diff /= 2f;
             //        RectangleF r = line.RelatedBoxes[i].Rectangles[line];
@@ -444,12 +443,14 @@ namespace MetroFramework.Drawing.Html
             float availWidth = lineBox.OwnerBox.ClientRectangle.Width - indent;
 
             #region Gather text sum
+
             foreach (CssBoxWord w in lineBox.Words)
             {
                 textSum += w.Width;
                 words += 1f;
             }
-            #endregion
+
+            #endregion Gather text sum
 
             if (words <= 0f) return; //Avoid Zero division
             float spacing = (availWidth - textSum) / words; //Spacing that will be used
@@ -467,9 +468,6 @@ namespace MetroFramework.Drawing.Html
 
                 //TODO: Background rectangles are being deactivated when justifying text.
             }
-
-            
-            
         }
 
         /// <summary>
@@ -509,17 +507,14 @@ namespace MetroFramework.Drawing.Html
         {
             if (line.Words.Count == 0) return;
 
-
             CssBoxWord lastWord = line.Words[line.Words.Count - 1];
             float right = line.OwnerBox.ActualRight - line.OwnerBox.ActualPaddingRight - line.OwnerBox.ActualBorderRightWidth;
             float diff = right - lastWord.Right - lastWord.LastMeasureOffset.X - lastWord.OwnerBox.ActualBorderRightWidth - lastWord.OwnerBox.ActualPaddingRight;
-
 
             if (diff <= 0) return;
 
             //if (line.OwnerBox.Direction == CssConstants.Rtl)
             //{
-
             //}
 
             foreach (CssBoxWord word in line.Words)
@@ -559,6 +554,6 @@ namespace MetroFramework.Drawing.Html
             //}
         }
 
-        #endregion
+        #endregion Inline Boxes
     }
 }

@@ -1,35 +1,36 @@
-﻿/**
- * MetroFramework - Modern UI for WinForms
- * 
- * The MIT License (MIT)
- * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
- * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-using System;
-using System.Drawing;
-using System.ComponentModel;
-using System.Security;
-using System.Windows.Forms;
-
-using MetroFramework.Components;
+﻿using MetroFramework.Components;
 using MetroFramework.Drawing;
 using MetroFramework.Interfaces;
+
+/**
+ * MetroFramework - Modern UI for WinForms
+ *
+ * The MIT License (MIT)
+ * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the
+ * following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Security;
+using System.Windows.Forms;
 
 namespace MetroFramework.Controls
 {
@@ -41,7 +42,7 @@ namespace MetroFramework.Controls
         Selectable
     }
 
-    #endregion
+    #endregion Enums
 
     [Designer("MetroFramework.Design.Controls.MetroLabelDesigner, " + AssemblyRef.MetroFrameworkDesignSN)]
     [ToolboxBitmap(typeof(Label))]
@@ -51,6 +52,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaintBackground;
+
         protected virtual void OnCustomPaintBackground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintBackground != null)
@@ -61,6 +63,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaint;
+
         protected virtual void OnCustomPaint(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaint != null)
@@ -71,6 +74,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaintForeground;
+
         protected virtual void OnCustomPaintForeground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintForeground != null)
@@ -80,6 +84,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroColorStyle metroStyle = MetroColorStyle.Default;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(MetroColorStyle.Default)]
         public MetroColorStyle Style
@@ -106,6 +111,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroThemeStyle metroTheme = MetroThemeStyle.Default;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(MetroThemeStyle.Default)]
         public MetroThemeStyle Theme
@@ -132,6 +138,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroStyleManager metroStyleManager = null;
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MetroStyleManager StyleManager
@@ -141,6 +148,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomBackColor = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseCustomBackColor
@@ -150,6 +158,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomForeColor = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseCustomForeColor
@@ -159,6 +168,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useStyleColors = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseStyleColors
@@ -176,13 +186,14 @@ namespace MetroFramework.Controls
             set { SetStyle(ControlStyles.Selectable, value); }
         }
 
-        #endregion
+        #endregion Interface
 
         #region Fields
 
         private DoubleBufferedTextBox baseTextBox;
 
         private MetroLabelSize metroLabelSize = MetroLabelSize.Medium;
+
         [DefaultValue(MetroLabelSize.Medium)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroLabelSize FontSize
@@ -192,6 +203,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroLabelWeight metroLabelWeight = MetroLabelWeight.Light;
+
         [DefaultValue(MetroLabelWeight.Light)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroLabelWeight FontWeight
@@ -201,6 +213,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroLabelMode labelMode = MetroLabelMode.Default;
+
         [DefaultValue(MetroLabelMode.Default)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroLabelMode LabelMode
@@ -210,6 +223,7 @@ namespace MetroFramework.Controls
         }
 
         private bool wrapToLine;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Behaviour)]
         public bool WrapToLine
@@ -218,7 +232,7 @@ namespace MetroFramework.Controls
             set { wrapToLine = value; Refresh(); }
         }
 
-        #endregion
+        #endregion Fields
 
         #region Constructor
 
@@ -234,7 +248,7 @@ namespace MetroFramework.Controls
             Controls.Add(baseTextBox);
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Paint Methods
 
@@ -367,7 +381,7 @@ namespace MetroFramework.Controls
             }
         }
 
-        #endregion
+        #endregion Paint Methods
 
         #region Overridden Methods
 
@@ -377,7 +391,7 @@ namespace MetroFramework.Controls
             {
                 UpdateBaseTextBox();
             }
-            
+
             base.Refresh();
         }
 
@@ -421,7 +435,7 @@ namespace MetroFramework.Controls
             }
         }
 
-        #endregion
+        #endregion Overridden Methods
 
         #region Label Selection Mode
 
@@ -433,7 +447,7 @@ namespace MetroFramework.Controls
             }
         }
 
-        private bool firstInitialization = true; 
+        private bool firstInitialization = true;
 
         private void CreateBaseTextBox()
         {
@@ -462,7 +476,7 @@ namespace MetroFramework.Controls
 
             baseTextBox.Size = GetPreferredSize(Size.Empty);
             baseTextBox.Multiline = true;
-            
+
             baseTextBox.DoubleClick += BaseTextBoxOnDoubleClick;
             baseTextBox.Click += BaseTextBoxOnClick;
 
@@ -488,7 +502,7 @@ namespace MetroFramework.Controls
         private void DestroyBaseTextbox()
         {
             if (!baseTextBox.Visible) return;
-            
+
             baseTextBox.DoubleClick -= BaseTextBoxOnDoubleClick;
             baseTextBox.Click -= BaseTextBoxOnClick;
             baseTextBox.Visible = false;
@@ -604,6 +618,6 @@ namespace MetroFramework.Controls
             Native.WinCaret.HideCaret(baseTextBox.Handle);
         }
 
-        #endregion
+        #endregion Label Selection Mode
     }
 }

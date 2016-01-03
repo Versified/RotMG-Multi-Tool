@@ -1,6 +1,6 @@
-﻿using System;
+﻿using RotMG_Multitool.Forms;
+using System;
 using System.Windows.Forms;
-using RotMG_Multitool.Forms;
 
 namespace RotMG_Multitool
 {

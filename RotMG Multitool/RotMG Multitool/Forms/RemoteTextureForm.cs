@@ -1,12 +1,12 @@
-﻿using System;
+﻿using MetroFramework;
+using MetroFramework.Forms;
+using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using MetroFramework.Forms;
-using Microsoft.VisualBasic;
-using MetroFramework;
 
 namespace RotMG_Multitool.Forms
 {
@@ -60,8 +60,8 @@ namespace RotMG_Multitool.Forms
             {
                 return new Picture()
                 {
-                   ID = Convert.ToInt64(x.Attribute("id").Value),
-                   Name = x.Element("PicName").Value
+                    ID = Convert.ToInt64(x.Attribute("id").Value),
+                    Name = x.Element("PicName").Value
                 };
             }
         }
@@ -76,7 +76,6 @@ namespace RotMG_Multitool.Forms
             catch
             {
             }
-            
         }
 
         private void metroButton2_Click(object sender, EventArgs e)

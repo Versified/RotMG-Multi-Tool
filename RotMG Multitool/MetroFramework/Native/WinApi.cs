@@ -1,26 +1,27 @@
 ﻿/**
  * MetroFramework - Modern UI for WinForms
- * 
+ *
  * The MIT License (MIT)
  * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the
  * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
+ *
+ * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -39,7 +40,10 @@ namespace MetroFramework.Native
             public Int32 x;
             public Int32 y;
 
-            public POINT(Int32 x, Int32 y) { this.x = x; this.y = y; }
+            public POINT(Int32 x, Int32 y)
+            {
+                this.x = x; this.y = y;
+            }
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -48,7 +52,10 @@ namespace MetroFramework.Native
             public Int32 cx;
             public Int32 cy;
 
-            public SIZE(Int32 cx, Int32 cy) { this.cx = cx; this.cy = cy; }
+            public SIZE(Int32 cx, Int32 cy)
+            {
+                this.cx = cx; this.cy = cy;
+            }
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -140,7 +147,7 @@ namespace MetroFramework.Native
             public int flags;
         }
 
-        #endregion
+        #endregion Structs
 
         #region Enums
 
@@ -441,7 +448,7 @@ namespace MetroFramework.Native
             True
         };
 
-        #endregion
+        #endregion Enums
 
         #region Fields
 
@@ -462,6 +469,7 @@ namespace MetroFramework.Native
 
         // GetWindow() constants
         public const int GW_HWNDFIRST = 0;
+
         public const int GW_HWNDLAST = 1;
         public const int GW_HWNDNEXT = 2;
         public const int GW_HWNDPREV = 3;
@@ -471,7 +479,7 @@ namespace MetroFramework.Native
         public const int WH_CALLWNDPROC = 4;
         public const int GWL_WNDPROC = -4;
 
-        #endregion
+        #endregion Fields
 
         #region API Calls
 
@@ -577,7 +585,7 @@ namespace MetroFramework.Native
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         internal static extern bool GetWindowRect(IntPtr hWnd, [In, Out] ref Rectangle rect);
 
-        #endregion
+        #endregion API Calls
 
         #region Helper Methods
 
@@ -591,6 +599,6 @@ namespace MetroFramework.Native
             return (dwValue >> 16) & 0xffff;
         }
 
-        #endregion
+        #endregion Helper Methods
     }
 }

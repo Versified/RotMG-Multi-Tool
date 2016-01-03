@@ -1,37 +1,36 @@
 /**
  * A Professional HTML Renderer You Will Use
- * 
+ *
  * The BSD License (BSD)
  * Copyright (c) 2011 Jose Menendez Póo, http://www.codeproject.com/Articles/32376/A-Professional-HTML-Renderer-You-Will-Use
- * 
- * Redistribution and use in source and binary forms, with or without modification, are 
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
  * permitted provided that the following conditions are met:
- * 
- * Redistributions of source code must retain the above copyright notice, this list of 
+ *
+ * Redistributions of source code must retain the above copyright notice, this list of
  * conditions and the following disclaimer.
- * 
- * Redistributions in binary form must reproduce the above copyright notice, this list of 
- * conditions and the following disclaimer in the documentation and/or other materials 
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this list of
+ * conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED 
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using System.Reflection;
 using System.ComponentModel;
-using System.Drawing.Design;
 using System.Drawing;
+using System.Drawing.Design;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace MetroFramework.Drawing.Html
 {
@@ -40,9 +39,10 @@ namespace MetroFramework.Drawing.Html
         : ScrollableControl
     {
         #region Fields
+
         protected InitialContainer htmlContainer;
 
-        #endregion
+        #endregion Fields
 
         #region Ctor
 
@@ -65,11 +65,11 @@ namespace MetroFramework.Drawing.Html
             HtmlRenderer.AddReference(Assembly.GetCallingAssembly());
         }
 
-        #endregion
+        #endregion Ctor
 
         #region Properties
 
-        [DesignerSerializationVisibility( DesignerSerializationVisibility.Visible)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public override bool AutoSize
         {
             get
@@ -106,7 +106,7 @@ namespace MetroFramework.Drawing.Html
         /// <summary>
         /// Gets or sets the text of this panel
         /// </summary>
-        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor)), 
+        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor)),
         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible), Localizable(true), Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
         public override string Text
         {
@@ -124,7 +124,7 @@ namespace MetroFramework.Drawing.Html
             }
         }
 
-        #endregion
+        #endregion Properties
 
         #region Methods
 
@@ -147,7 +147,7 @@ namespace MetroFramework.Drawing.Html
             {
                 htmlContainer.MeasureBounds(g);
             }
-            
+
             AutoScrollMinSize = Size.Round(htmlContainer.MaximumSize);
         }
 
@@ -169,13 +169,11 @@ namespace MetroFramework.Drawing.Html
         {
             base.OnPaint(e);
 
-            if (!(this is  HtmlLabel)) e.Graphics.Clear(SystemColors.Window);
+            if (!(this is HtmlLabel)) e.Graphics.Clear(SystemColors.Window);
 
-            
             htmlContainer.ScrollOffset = AutoScrollPosition;
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             htmlContainer.Paint(e.Graphics);
-
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -208,9 +206,8 @@ namespace MetroFramework.Drawing.Html
                     return;
                 }
             }
-
         }
 
-        #endregion
+        #endregion Methods
     }
 }

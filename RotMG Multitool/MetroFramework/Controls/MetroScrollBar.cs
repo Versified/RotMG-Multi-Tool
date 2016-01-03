@@ -1,35 +1,37 @@
-﻿/**
+﻿using MetroFramework.Components;
+using MetroFramework.Drawing;
+using MetroFramework.Interfaces;
+using MetroFramework.Native;
+
+/**
  * MetroFramework - Modern UI for WinForms
- * 
+ *
  * The MIT License (MIT)
  * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the
  * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
+ *
+ * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Security;
 using System.Windows.Forms;
-using MetroFramework.Components;
-using MetroFramework.Drawing;
-using MetroFramework.Interfaces;
-using MetroFramework.Native;
 
 namespace MetroFramework.Controls
 {
@@ -41,7 +43,7 @@ namespace MetroFramework.Controls
         Vertical
     }
 
-    #endregion
+    #endregion Enums
 
     [Designer("MetroFramework.Design.Controls.MetroScrollBarDesigner, " + AssemblyRef.MetroFrameworkDesignSN)]
     [DefaultEvent("Scroll")]
@@ -52,6 +54,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaintBackground;
+
         protected virtual void OnCustomPaintBackground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintBackground != null)
@@ -62,6 +65,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaint;
+
         protected virtual void OnCustomPaint(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaint != null)
@@ -72,6 +76,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaintForeground;
+
         protected virtual void OnCustomPaintForeground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintForeground != null)
@@ -81,6 +86,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroColorStyle metroStyle = MetroColorStyle.Default;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(MetroColorStyle.Default)]
         public MetroColorStyle Style
@@ -107,6 +113,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroThemeStyle metroTheme = MetroThemeStyle.Default;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(MetroThemeStyle.Default)]
         public MetroThemeStyle Theme
@@ -133,6 +140,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroStyleManager metroStyleManager = null;
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MetroStyleManager StyleManager
@@ -142,6 +150,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomBackColor = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseCustomBackColor
@@ -151,6 +160,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomForeColor = false;
+
         [Browsable(false)]
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
@@ -162,6 +172,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useStyleColors = false;
+
         [Browsable(false)]
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
@@ -181,7 +192,7 @@ namespace MetroFramework.Controls
             set { SetStyle(ControlStyles.Selectable, value); }
         }
 
-        #endregion
+        #endregion Interface
 
         #region Events
 
@@ -217,7 +228,7 @@ namespace MetroFramework.Controls
             Scroll(this, new ScrollEventArgs(type, oldValue, newValue, orientation));
         }
 
-        #endregion
+        #endregion Events
 
         #region Fields
 
@@ -267,6 +278,7 @@ namespace MetroFramework.Controls
         private bool isPressed;
 
         private bool useBarColor = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseBarColor
@@ -279,16 +291,17 @@ namespace MetroFramework.Controls
         public int ScrollbarSize
         {
             get { return Orientation == MetroScrollOrientation.Vertical ? Width : Height; }
-            set 
-            { 
+            set
+            {
                 if (Orientation == MetroScrollOrientation.Vertical)
                     Width = value;
                 else
-                    Height = value; 
+                    Height = value;
             }
         }
 
         private bool highlightOnWheel = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool HighlightOnWheel
@@ -497,7 +510,7 @@ namespace MetroFramework.Controls
 
         private Timer autoHoverTimer = null;
 
-        #endregion
+        #endregion Fields
 
         #region Constructor
 
@@ -535,14 +548,14 @@ namespace MetroFramework.Controls
             return thumbRectangle.Contains(point);
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Update Methods
 
         [SecuritySafeCritical]
         public void BeginUpdate()
         {
-            WinApi.SendMessage(Handle, (int) WinApi.Messages.WM_SETREDRAW, false, 0);
+            WinApi.SendMessage(Handle, (int)WinApi.Messages.WM_SETREDRAW, false, 0);
             inUpdate = true;
         }
 
@@ -555,7 +568,7 @@ namespace MetroFramework.Controls
             Refresh();
         }
 
-        #endregion
+        #endregion Update Methods
 
         #region Paint Methods
 
@@ -693,7 +706,7 @@ namespace MetroFramework.Controls
             }
         }
 
-        #endregion
+        #endregion Paint Methods
 
         #region Focus Methods
 
@@ -729,7 +742,7 @@ namespace MetroFramework.Controls
             base.OnLeave(e);
         }
 
-        #endregion
+        #endregion Focus Methods
 
         #region Mouse Methods
 
@@ -761,8 +774,8 @@ namespace MetroFramework.Controls
 
             Focus();
 
-            if (e.Button == MouseButtons.Left) {
-
+            if (e.Button == MouseButtons.Left)
+            {
                 var mouseLocation = e.Location;
 
                 if (thumbRectangle.Contains(mouseLocation))
@@ -886,7 +899,7 @@ namespace MetroFramework.Controls
 
                         if (pixelRange != 0)
                         {
-                            perc = (thumbPos)/(float) pixelRange;
+                            perc = (thumbPos) / (float)pixelRange;
                         }
 
                         curValue = Convert.ToInt32((perc * (maximum - minimum)) + minimum);
@@ -916,7 +929,7 @@ namespace MetroFramework.Controls
             }
         }
 
-        #endregion
+        #endregion Mouse Methods
 
         #region Keyboard Methods
 
@@ -938,7 +951,7 @@ namespace MetroFramework.Controls
             base.OnKeyUp(e);
         }
 
-        #endregion
+        #endregion Keyboard Methods
 
         #region Management Methods
 
@@ -1041,7 +1054,7 @@ namespace MetroFramework.Controls
 
                 thumbRectangle = new Rectangle(ClientRectangle.X, ClientRectangle.Y, thumbWidth, thumbHeight);
 
-                thumbPosition = thumbRectangle.Height/2;
+                thumbPosition = thumbRectangle.Height / 2;
                 thumbBottomLimitBottom = ClientRectangle.Bottom;
                 thumbBottomLimitTop = thumbBottomLimitBottom - thumbRectangle.Height;
                 thumbTopLimit = ClientRectangle.Y;
@@ -1056,7 +1069,7 @@ namespace MetroFramework.Controls
 
                 thumbRectangle = new Rectangle(ClientRectangle.X, ClientRectangle.Y, thumbWidth, thumbHeight);
 
-                thumbPosition = thumbRectangle.Width/2;
+                thumbPosition = thumbRectangle.Width / 2;
                 thumbBottomLimitBottom = ClientRectangle.Right;
                 thumbBottomLimitTop = thumbBottomLimitBottom - thumbRectangle.Width;
                 thumbTopLimit = ClientRectangle.X;
@@ -1131,10 +1144,10 @@ namespace MetroFramework.Controls
 
             if (realRange != 0)
             {
-                perc = (curValue - (float) minimum) / realRange;
+                perc = (curValue - (float)minimum) / realRange;
             }
 
-            return Math.Max(thumbTopLimit, Math.Min(thumbBottomLimitTop, Convert.ToInt32((perc*pixelRange))));
+            return Math.Max(thumbTopLimit, Math.Min(thumbBottomLimitTop, Convert.ToInt32((perc * pixelRange))));
         }
 
         private int GetThumbSize()
@@ -1148,7 +1161,7 @@ namespace MetroFramework.Controls
                 return trackSize;
             }
 
-            float newThumbSize = (largeChange * (float) trackSize) / maximum;
+            float newThumbSize = (largeChange * (float)trackSize) / maximum;
 
             return Convert.ToInt32(Math.Min(trackSize, Math.Max(newThumbSize, 10f)));
         }
@@ -1248,6 +1261,6 @@ namespace MetroFramework.Controls
             }
         }
 
-        #endregion
+        #endregion Management Methods
     }
 }

@@ -1,17 +1,17 @@
-﻿using System;
+﻿using MetroFramework;
+using RotMG_Multitool.Forms;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using RotMG_Multitool.Forms;
-using MetroFramework;
 
 namespace RotMG_Multitool.Serializers
 {
     internal class Item
     {
-        private readonly  ItemCreatorForm itemCreatorForm;
+        private readonly ItemCreatorForm itemCreatorForm;
 
         public Item(ItemCreatorForm itemCreatorForm)
         {
@@ -132,7 +132,7 @@ namespace RotMG_Multitool.Serializers
             if (dlr != DialogResult.Yes) return;
             //MessageBox.Show("Saving generated XML file to \r\n" + fullFileName);
             MetroMessageBox.Show(itemCreatorForm, "Saving generated XML file to \r\n" + fullFileName, "Finished XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
+
             doc.Save(fullFileName);
         }
     }

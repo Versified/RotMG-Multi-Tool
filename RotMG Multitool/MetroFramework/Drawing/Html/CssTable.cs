@@ -1,32 +1,32 @@
 /**
  * A Professional HTML Renderer You Will Use
- * 
+ *
  * The BSD License (BSD)
  * Copyright (c) 2011 Jose Menendez Póo, http://www.codeproject.com/Articles/32376/A-Professional-HTML-Renderer-You-Will-Use
- * 
- * Redistribution and use in source and binary forms, with or without modification, are 
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
  * permitted provided that the following conditions are met:
- * 
- * Redistributions of source code must retain the above copyright notice, this list of 
+ *
+ * Redistributions of source code must retain the above copyright notice, this list of
  * conditions and the following disclaimer.
- * 
- * Redistributions in binary form must reproduce the above copyright notice, this list of 
- * conditions and the following disclaimer in the documentation and/or other materials 
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this list of
+ * conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED 
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 
 namespace MetroFramework.Drawing.Html
@@ -56,6 +56,7 @@ namespace MetroFramework.Drawing.Html
             #region Props
 
             private int _startRow;
+
             /// <summary>
             /// Gets the index of the row where box starts
             /// </summary>
@@ -74,11 +75,10 @@ namespace MetroFramework.Drawing.Html
                 get { return _endRow; }
             }
 
-
-            #endregion
+            #endregion Props
         }
 
-        #endregion
+        #endregion Subclasses
 
         #region Fields
 
@@ -95,7 +95,7 @@ namespace MetroFramework.Drawing.Html
         private bool _widthSpecified;
         private float[] _columnMinWidths;
 
-        #endregion
+        #endregion Fields
 
         #region Ctor
 
@@ -107,7 +107,7 @@ namespace MetroFramework.Drawing.Html
         }
 
         public CssTable(CssBox tableBox, Graphics g)
-            :this()
+            : this()
         {
             if (!(tableBox.Display == CssConstants.Table || tableBox.Display == CssConstants.InlineTable))
                 throw new ArgumentException("Box is not a table", "tableBox");
@@ -119,7 +119,7 @@ namespace MetroFramework.Drawing.Html
             Analyze(g);
         }
 
-        #endregion
+        #endregion Ctor
 
         #region Props
 
@@ -161,7 +161,7 @@ namespace MetroFramework.Drawing.Html
         /// </summary>
         public float[] ColumnMinWidths
         {
-            get 
+            get
             {
                 if (_columnMinWidths == null)
                 {
@@ -177,13 +177,11 @@ namespace MetroFramework.Drawing.Html
                             float spannedwidth = GetSpannedMinWidth(row, cell, col, colspan) + (colspan - 1) * HorizontalSpacing;
 
                             _columnMinWidths[affectcol] = Math.Max(_columnMinWidths[affectcol], cell.GetMinimumWidth() - spannedwidth);
-
                         }
                     }
-
                 }
 
-                return _columnMinWidths; 
+                return _columnMinWidths;
             }
         }
 
@@ -205,7 +203,7 @@ namespace MetroFramework.Drawing.Html
         }
 
         /// <summary>
-        /// Gets the boxes that represents the table-row Boxes of the table, 
+        /// Gets the boxes that represents the table-row Boxes of the table,
         /// including those inside of the TBODY tags
         /// </summary>
         public List<CssBox> BodyRows
@@ -236,7 +234,7 @@ namespace MetroFramework.Drawing.Html
         /// </summary>
         public float HorizontalSpacing
         {
-            get 
+            get
             {
                 if (TableBox.BorderCollapse == CssConstants.Collapse)
                 {
@@ -280,7 +278,7 @@ namespace MetroFramework.Drawing.Html
             get { return _tableBox; }
         }
 
-        #endregion
+        #endregion Props
 
         #region Methods
 
@@ -294,6 +292,7 @@ namespace MetroFramework.Drawing.Html
             float availCellSpace = float.NaN; //Will be set later
 
             #region Assign box kinds
+
             foreach (CssBox b in TableBox.Boxes)
             {
                 b.RemoveAnonymousSpaces();
@@ -302,12 +301,14 @@ namespace MetroFramework.Drawing.Html
                     case CssConstants.TableCaption:
                         _caption = b;
                         break;
+
                     case CssConstants.TableColumn:
                         for (int i = 0; i < GetSpan(b); i++)
                         {
                             Columns.Add(CreateColumn(b));
                         }
                         break;
+
                     case CssConstants.TableColumnGroup:
                         if (b.Boxes.Count == 0)
                         {
@@ -329,31 +330,37 @@ namespace MetroFramework.Drawing.Html
                             }
                         }
                         break;
+
                     case CssConstants.TableFooterGroup:
                         if (FooterBox != null)
                             BodyRows.Add(b);
                         else
                             _footerBox = b;
                         break;
+
                     case CssConstants.TableHeaderGroup:
                         if (HeaderBox != null)
                             BodyRows.Add(b);
                         else
                             _headerBox = b;
                         break;
+
                     case CssConstants.TableRow:
                         BodyRows.Add(b);
                         break;
+
                     case CssConstants.TableRowGroup:
                         foreach (CssBox bb in b.Boxes)
                             if (b.Display == CssConstants.TableRow)
                                 BodyRows.Add(b);
                         break;
+
                     default:
                         break;
                 }
-            } 
-            #endregion
+            }
+
+            #endregion Assign box kinds
 
             #region Gather AllRows
 
@@ -361,7 +368,7 @@ namespace MetroFramework.Drawing.Html
             _allRows.AddRange(BodyRows);
             if (FooterBox != null) _allRows.AddRange(FooterBox.Boxes);
 
-            #endregion
+            #endregion Gather AllRows
 
             #region Insert EmptyBoxes for vertical cell spanning
 
@@ -375,9 +382,8 @@ namespace MetroFramework.Drawing.Html
                 {
                     row.RemoveAnonymousSpaces();
                     curcol = 0;
-                    for(int k = 0; k < row.Boxes.Count ; k++)
+                    for (int k = 0; k < row.Boxes.Count; k++)
                     {
-
                         CssBox cell = row.Boxes[k];
                         int rowspan = GetRowSpan(cell);
                         int realcol = GetCellRealColumnIndex(row, cell); //Real column of the cell
@@ -395,7 +401,6 @@ namespace MetroFramework.Drawing.Html
                                 colcount++;
                                 realcol -= GetColSpan(rows[i].Boxes[j]) - 1;
                             }
-
                         } // End for (int i = currow + 1; i < currow + rowspan; i++)
                         curcol++;
                     } /// End foreach (Box cell in row.Boxes)
@@ -403,10 +408,9 @@ namespace MetroFramework.Drawing.Html
                 } /// End foreach (Box row in rows)
 
                 TableBox.TableFixed = true;
-
             } /// End if (!TableBox.TableFixed)
 
-            #endregion
+            #endregion Insert EmptyBoxes for vertical cell spanning
 
             #region Determine Row and Column Count, and ColumnWidths
 
@@ -452,11 +456,12 @@ namespace MetroFramework.Drawing.Html
                     }
                 }
 
-                #endregion
+                #endregion Fill ColumnWidths array by scanning column widths
             }
             else
             {
                 #region Fill ColumnWidths array by scanning width in table-cell definitions
+
                 foreach (CssBox row in AllRows)
                 {
                     //Check for column width in table-cell definitions
@@ -467,7 +472,7 @@ namespace MetroFramework.Drawing.Html
                             row.Boxes[i].Display == CssConstants.TableCell)//And the box is a table-cell
                         {
                             CssLength len = new CssLength(row.Boxes[i].Width); //Get specified width
-                            
+
                             if (len.Number > 0) //If some width specified
                             {
                                 int colspan = GetColSpan(row.Boxes[i]);
@@ -490,10 +495,11 @@ namespace MetroFramework.Drawing.Html
                         }
                     }
                 }
-                #endregion
+
+                #endregion Fill ColumnWidths array by scanning width in table-cell definitions
             }
 
-            #endregion
+            #endregion Determine Row and Column Count, and ColumnWidths
 
             #region Determine missing Column widths
 
@@ -543,7 +549,7 @@ namespace MetroFramework.Drawing.Html
                         ColumnWidths[i] = _maxFullWidths[i];
             }
 
-            #endregion
+            #endregion Determine missing Column widths
 
             #region Reduce widths if necessary
 
@@ -562,7 +568,7 @@ namespace MetroFramework.Drawing.Html
                 if (curCol >= ColumnWidths.Length) curCol = 0;
             }
 
-            #endregion
+            #endregion Reduce widths if necessary
 
             #region Check for minimum sizes (increment widths if necessary)
 
@@ -573,7 +579,7 @@ namespace MetroFramework.Drawing.Html
                     int colspan = GetColSpan(cell);
                     int col = GetCellRealColumnIndex(row, cell);
                     int affectcol = col + colspan - 1;
-                    
+
                     if (ColumnWidths[col] < ColumnMinWidths[col])
                     {
                         float diff = ColumnMinWidths[col] - ColumnWidths[col];
@@ -587,13 +593,13 @@ namespace MetroFramework.Drawing.Html
                 }
             }
 
-            #endregion
+            #endregion Check for minimum sizes (increment widths if necessary)
 
             #region Set table padding
 
             TableBox.Padding = "0"; //Ensure there's no padding
 
-            #endregion
+            #endregion Set table padding
 
             #region Layout cells
 
@@ -633,7 +639,7 @@ namespace MetroFramework.Drawing.Html
                             maxBottom = Math.Max(maxBottom, sb.ExtendedBox.ActualBottom);
                         }
                     }
-                    else if(rowspan == 1)
+                    else if (rowspan == 1)
                     {
                         maxBottom = Math.Max(maxBottom, cell.ActualBottom);
                     }
@@ -651,7 +657,7 @@ namespace MetroFramework.Drawing.Html
                         cell.ActualBottom = maxBottom;
                         CssLayoutEngine.ApplyCellVerticalAlignment(g, cell);
                     }
-                    else if(spacer != null && spacer.EndRow == currentrow)
+                    else if (spacer != null && spacer.EndRow == currentrow)
                     {
                         spacer.ExtendedBox.ActualBottom = maxBottom;
                         CssLayoutEngine.ApplyCellVerticalAlignment(g, spacer.ExtendedBox);
@@ -665,7 +671,7 @@ namespace MetroFramework.Drawing.Html
             TableBox.ActualRight = maxRight + HorizontalSpacing + TableBox.ActualBorderRightWidth;
             TableBox.ActualBottom = maxBottom + VerticalSpacing + TableBox.ActualBorderBottomWidth;
 
-            #endregion
+            #endregion Layout cells
         }
 
         /// <summary>
@@ -723,7 +729,7 @@ namespace MetroFramework.Drawing.Html
             {
                 if (column >= ColumnWidths.Length) break;
                 if (ColumnWidths.Length <= i) break;
-                sum += ColumnWidths[i]; 
+                sum += ColumnWidths[i];
             }
 
             sum += (colspan - 1) * HorizontalSpacing;
@@ -848,7 +854,7 @@ namespace MetroFramework.Drawing.Html
         /// </summary>
         /// <returns></returns>
         /// <remarks>
-        /// The table's width can be larger than the result of this method, because of the minimum 
+        /// The table's width can be larger than the result of this method, because of the minimum
         /// size that individual boxes.
         /// </remarks>
         private float GetAvailableWidth()
@@ -883,7 +889,7 @@ namespace MetroFramework.Drawing.Html
         /// </remarks>
         private float GetAvailableCellWidth()
         {
-            return GetAvailableWidth() - 
+            return GetAvailableWidth() -
                 HorizontalSpacing * (ColumnCount + 1) -
                 TableBox.ActualBorderLeftWidth - TableBox.ActualBorderRightWidth;
         }
@@ -901,7 +907,7 @@ namespace MetroFramework.Drawing.Html
                     throw new Exception("CssTable Algorithm error: There's a NaN in column widths");
                 else
                     f += ColumnWidths[i];
-            
+
             //Take cell-spacing
             f += HorizontalSpacing * (ColumnWidths.Length + 1);
 
@@ -935,7 +941,6 @@ namespace MetroFramework.Drawing.Html
             //return b;
         }
 
-        #endregion
+        #endregion Methods
     }
 }
-

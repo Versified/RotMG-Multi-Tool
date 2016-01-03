@@ -1,5 +1,5 @@
-﻿using System;
-using MetroFramework.Forms;
+﻿using MetroFramework.Forms;
+using System;
 
 namespace RotMG_Multitool.Forms
 {

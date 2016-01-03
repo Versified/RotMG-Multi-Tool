@@ -1,14 +1,8 @@
 ﻿using MetroFramework.Controls;
-using MetroFramework.Drawing;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Diagnostics;
-using System.Text;
+using System.Drawing;
 using System.Windows.Forms;
-using MetroFramework.Forms;
 
 namespace MetroFramework
 {
@@ -45,7 +39,7 @@ namespace MetroFramework
         private Color _question = Color.FromArgb(71, 164, 71);
 
         /// <summary>
-        /// Gets the top body section of the control. 
+        /// Gets the top body section of the control.
         /// </summary>
         public Panel Body
         {
@@ -85,9 +79,11 @@ namespace MetroFramework
                 case MessageBoxIcon.Exclamation:
                     panelbody.BackColor = _warningColor;
                     break;
+
                 case MessageBoxIcon.Error:
                     panelbody.BackColor = _errorColor;
                     break;
+
                 default: break;
             }
 
@@ -103,6 +99,7 @@ namespace MetroFramework
                     EnableButton(metroButton2, false);
                     EnableButton(metroButton3, false);
                     break;
+
                 case MessageBoxButtons.OKCancel:
                     EnableButton(metroButton1);
 
@@ -118,6 +115,7 @@ namespace MetroFramework
 
                     EnableButton(metroButton3, false);
                     break;
+
                 case MessageBoxButtons.RetryCancel:
                     EnableButton(metroButton1);
 
@@ -133,6 +131,7 @@ namespace MetroFramework
 
                     EnableButton(metroButton3, false);
                     break;
+
                 case MessageBoxButtons.YesNo:
                     EnableButton(metroButton1);
 
@@ -148,6 +147,7 @@ namespace MetroFramework
 
                     EnableButton(metroButton3, false);
                     break;
+
                 case MessageBoxButtons.YesNoCancel:
                     EnableButton(metroButton1);
 
@@ -165,6 +165,7 @@ namespace MetroFramework
                     metroButton3.Tag = DialogResult.Cancel;
 
                     break;
+
                 case MessageBoxButtons.AbortRetryIgnore:
                     EnableButton(metroButton1);
 
@@ -182,18 +183,20 @@ namespace MetroFramework
                     metroButton3.Tag = DialogResult.Ignore;
 
                     break;
-                default : break;
+
+                default: break;
             }
 
             switch (_properties.Icon)
             {
-                case  MessageBoxIcon.Error:
+                case MessageBoxIcon.Error:
                     panelbody.BackColor = _errorColor; break;
                 case MessageBoxIcon.Warning:
                     panelbody.BackColor = _warningColor; break;
                 case MessageBoxIcon.Information:
-                    panelbody.BackColor = _defaultColor;                    
-                     break;
+                    panelbody.BackColor = _defaultColor;
+                    break;
+
                 case MessageBoxIcon.Question:
                     panelbody.BackColor = _question; break;
                 default:
@@ -222,18 +225,21 @@ namespace MetroFramework
                         if (metroButton1.Enabled) metroButton1.Focus();
                     }
                     break;
+
                 case MessageBoxDefaultButton.Button2:
                     if (metroButton2 != null)
                     {
                         if (metroButton2.Enabled) metroButton2.Focus();
                     }
                     break;
+
                 case MessageBoxDefaultButton.Button3:
                     if (metroButton3 != null)
                     {
                         if (metroButton3.Enabled) metroButton3.Focus();
                     }
-                    break;  
+                    break;
+
                 default: break;
             }
         }
@@ -261,7 +267,7 @@ namespace MetroFramework
 
             button.MouseClick -= button_MouseClick;
             button.MouseClick += button_MouseClick;
-            
+
             button.MouseEnter -= button_MouseEnter;
             button.MouseEnter += button_MouseEnter;
 
@@ -288,8 +294,7 @@ namespace MetroFramework
             MetroButton button = (MetroButton)sender;
             if (!button.Enabled) return;
             _result = (DialogResult)button.Tag;
-            Hide(); 
+            Hide();
         }
-
     }
 }

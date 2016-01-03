@@ -1,11 +1,11 @@
-﻿using System;
+﻿using MetroFramework;
+using RotMG_Multitool.Forms;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using RotMG_Multitool.Forms;
-using MetroFramework;
 
 namespace RotMG_Multitool.Serializers
 {
@@ -20,8 +20,10 @@ namespace RotMG_Multitool.Serializers
 
         public string ObjectType { get; set; } // 0x0000
         public string ObjectId { get; set; } // Name
+
         // <Enemy />
         public string Class { get; set; } // Character
+
         public string RemoteTextureInstance { get; set; } // draw
         public string RemoteTextureId { get; set; } // 948590345743985374589
         public string TextureFile { get; set; } // lofiinterface

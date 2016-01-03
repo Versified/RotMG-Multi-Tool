@@ -1,34 +1,33 @@
-﻿/**
+﻿using MetroFramework.Drawing;
+using MetroFramework.Interfaces;
+
+/**
  * MetroFramework - Modern UI for WinForms
- * 
+ *
  * The MIT License (MIT)
  * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the
  * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
+ *
+ * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-using System;
-using System.Collections.Generic;
+
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-
-using MetroFramework.Interfaces;
-using MetroFramework.Drawing;
 
 namespace MetroFramework.Components
 {
@@ -38,6 +37,7 @@ namespace MetroFramework.Components
         #region Interface
 
         private MetroColorStyle metroStyle = MetroColorStyle.Blue;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroColorStyle Style
         {
@@ -52,6 +52,7 @@ namespace MetroFramework.Components
         }
 
         private MetroThemeStyle metroTheme = MetroThemeStyle.Light;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroThemeStyle Theme
         {
@@ -66,6 +67,7 @@ namespace MetroFramework.Components
         }
 
         private MetroStyleManager metroStyleManager = null;
+
         [Browsable(false)]
         public MetroStyleManager StyleManager
         {
@@ -73,7 +75,7 @@ namespace MetroFramework.Components
             set { metroStyleManager = value; }
         }
 
-        #endregion
+        #endregion Interface
 
         #region Fields
 
@@ -128,7 +130,7 @@ namespace MetroFramework.Components
             set { base.ToolTipIcon = ToolTipIcon.None; }
         }
 
-        #endregion
+        #endregion Fields
 
         #region Constructor
 
@@ -141,7 +143,7 @@ namespace MetroFramework.Components
             Popup += new PopupEventHandler(MetroToolTip_Popup);
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Management Methods
 
@@ -197,6 +199,6 @@ namespace MetroFramework.Components
             TextRenderer.DrawText(e.Graphics, e.ToolTipText, f, e.Bounds, foreColor, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
         }
 
-        #endregion
+        #endregion Management Methods
     }
 }

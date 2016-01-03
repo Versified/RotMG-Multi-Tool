@@ -1,28 +1,31 @@
-﻿/**
+﻿using MetroFramework.Controls;
+using MetroFramework.Native;
+
+/**
  * MetroFramework - Modern UI for WinForms
- * 
+ *
  * The MIT License (MIT)
  * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the
  * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
+ *
+ * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-// Based on original work by 
+// Based on original work by
 // (c) Mick Doherty
 // http://dotnetrix.co.uk/tabcontrol.htm
 // http://www.pcreview.co.uk/forums/adding-custom-tabpages-design-time-t2904262.html
@@ -33,9 +36,6 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-
-using MetroFramework.Controls;
-using MetroFramework.Native;
 
 namespace MetroFramework.Design.Controls
 {
@@ -56,6 +56,7 @@ namespace MetroFramework.Design.Controls
                 return Control.Dock == DockStyle.Fill ? SelectionRules.Visible : base.SelectionRules;
             }
         }
+
         public override DesignerVerbCollection Verbs
         {
             get
@@ -85,7 +86,7 @@ namespace MetroFramework.Design.Controls
             }
         }
 
-        #endregion
+        #endregion Fields
 
         #region Constructor
 
@@ -96,13 +97,13 @@ namespace MetroFramework.Design.Controls
             designerVerbs.AddRange(new[] { verb1, verb2 });
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Private Methods
-        
+
         private void OnAddPage(Object sender, EventArgs e)
         {
-            var parentControl = (MetroTabControl) Control;
+            var parentControl = (MetroTabControl)Control;
             var oldTabs = parentControl.Controls;
 
             RaiseComponentChanging(TypeDescriptor.GetProperties(parentControl)["TabPages"]);
@@ -120,7 +121,7 @@ namespace MetroFramework.Design.Controls
 
         private void OnRemovePage(Object sender, EventArgs e)
         {
-            var parentControl = (MetroTabControl) Control;
+            var parentControl = (MetroTabControl)Control;
             var oldTabs = parentControl.Controls;
 
             if (parentControl.SelectedIndex < 0)
@@ -145,20 +146,21 @@ namespace MetroFramework.Design.Controls
 
         private void SetVerbs()
         {
-            var parentControl = (MetroTabControl) Control;
+            var parentControl = (MetroTabControl)Control;
 
             switch (parentControl.TabPages.Count)
             {
                 case 0:
                     Verbs[1].Enabled = false;
                     break;
+
                 default:
                     Verbs[1].Enabled = true;
                     break;
             }
         }
 
-        #endregion
+        #endregion Private Methods
 
         #region Overrides
 
@@ -170,7 +172,7 @@ namespace MetroFramework.Design.Controls
                 case (int)WinApi.Messages.WM_NCHITTEST:
                     if (m.Result.ToInt32() == (int)WinApi.HitTest.HTTRANSPARENT)
                     {
-                        m.Result = (IntPtr) WinApi.HitTest.HTCLIENT;
+                        m.Result = (IntPtr)WinApi.HitTest.HTCLIENT;
                     }
                     break;
             }
@@ -235,6 +237,7 @@ namespace MetroFramework.Design.Controls
 
             base.PreFilterProperties(properties);
         }
-        #endregion
+
+        #endregion Overrides
     }
 }

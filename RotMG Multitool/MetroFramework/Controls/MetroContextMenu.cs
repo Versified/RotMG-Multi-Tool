@@ -1,12 +1,9 @@
-﻿using MetroFramework;
-using MetroFramework.Components;
+﻿using MetroFramework.Components;
 using MetroFramework.Drawing;
 using MetroFramework.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace MetroFramework.Controls
@@ -17,6 +14,7 @@ namespace MetroFramework.Controls
 
         [Category("Metro Appearance")]
         public event EventHandler<MetroPaintEventArgs> CustomPaintBackground;
+
         protected virtual void OnCustomPaintBackground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintBackground != null)
@@ -27,6 +25,7 @@ namespace MetroFramework.Controls
 
         [Category("Metro Appearance")]
         public event EventHandler<MetroPaintEventArgs> CustomPaint;
+
         protected virtual void OnCustomPaint(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaint != null)
@@ -37,6 +36,7 @@ namespace MetroFramework.Controls
 
         [Category("Metro Appearance")]
         public event EventHandler<MetroPaintEventArgs> CustomPaintForeground;
+
         protected virtual void OnCustomPaintForeground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintForeground != null)
@@ -46,6 +46,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroColorStyle metroStyle = MetroColorStyle.Default;
+
         [Category("Metro Appearance")]
         [DefaultValue(MetroColorStyle.Default)]
         public MetroColorStyle Style
@@ -72,6 +73,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroThemeStyle metroTheme = MetroThemeStyle.Default;
+
         [Category("Metro Appearance")]
         [DefaultValue(MetroThemeStyle.Default)]
         public MetroThemeStyle Theme
@@ -98,6 +100,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroStyleManager metroStyleManager = null;
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MetroStyleManager StyleManager
@@ -111,6 +114,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomBackColor = false;
+
         [DefaultValue(false)]
         [Category("Metro Appearance")]
         public bool UseCustomBackColor
@@ -120,6 +124,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomForeColor = false;
+
         [DefaultValue(false)]
         [Category("Metro Appearance")]
         public bool UseCustomForeColor
@@ -129,6 +134,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useStyleColors = false;
+
         [DefaultValue(false)]
         [Category("Metro Appearance")]
         public bool UseStyleColors
@@ -146,8 +152,7 @@ namespace MetroFramework.Controls
             set { SetStyle(ControlStyles.Selectable, value); }
         }
 
-        #endregion
-
+        #endregion Interface
 
         public MetroContextMenu(IContainer Container)
         {
@@ -166,8 +171,9 @@ namespace MetroFramework.Controls
 
         private class MetroCTXRenderer : ToolStripProfessionalRenderer
         {
-            MetroFramework.MetroThemeStyle _theme;
-            public MetroCTXRenderer(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style)) 
+            private MetroFramework.MetroThemeStyle _theme;
+
+            public MetroCTXRenderer(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style))
             {
                 _theme = Theme;
             }
@@ -181,8 +187,8 @@ namespace MetroFramework.Controls
 
         private class contextcolors : ProfessionalColorTable
         {
-            MetroThemeStyle _theme = MetroThemeStyle.Light;
-            MetroColorStyle _style = MetroColorStyle.Blue;
+            private MetroThemeStyle _theme = MetroThemeStyle.Light;
+            private MetroColorStyle _style = MetroColorStyle.Blue;
 
             public contextcolors(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style)
             {

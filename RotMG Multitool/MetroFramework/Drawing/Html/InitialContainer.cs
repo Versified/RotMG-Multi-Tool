@@ -1,34 +1,34 @@
 /**
  * A Professional HTML Renderer You Will Use
- * 
+ *
  * The BSD License (BSD)
  * Copyright (c) 2011 Jose Menendez Póo, http://www.codeproject.com/Articles/32376/A-Professional-HTML-Renderer-You-Will-Use
- * 
- * Redistribution and use in source and binary forms, with or without modification, are 
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
  * permitted provided that the following conditions are met:
- * 
- * Redistributions of source code must retain the above copyright notice, this list of 
+ *
+ * Redistributions of source code must retain the above copyright notice, this list of
  * conditions and the following disclaimer.
- * 
- * Redistributions in binary form must reproduce the above copyright notice, this list of 
- * conditions and the following disclaimer in the documentation and/or other materials 
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this list of
+ * conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED 
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace MetroFramework.Drawing.Html
 {
@@ -37,6 +37,7 @@ namespace MetroFramework.Drawing.Html
         : CssBox
     {
         #region Fields
+
         private Dictionary<string, Dictionary<string, CssBlock>> _media_blocks;
         private string _documentSource;
         private bool _avoidGeometryAntialias;
@@ -44,7 +45,8 @@ namespace MetroFramework.Drawing.Html
         private PointF _scrollOffset;
         private Dictionary<CssBox, RectangleF> _linkRegions;
         private bool _avoidTextAntialias;
-        #endregion
+
+        #endregion Fields
 
         #region Ctor
 
@@ -69,7 +71,7 @@ namespace MetroFramework.Drawing.Html
             BlockCorrection(this);
         }
 
-        #endregion
+        #endregion Ctor
 
         #region Props
 
@@ -81,18 +83,17 @@ namespace MetroFramework.Drawing.Html
             get { return _linkRegions; }
         }
 
-
         /// <summary>
         /// Gets the blocks of style defined on this structure, separated by media type.
         /// General blocks are defined under the "all" Key.
         /// </summary>
         /// <remarks>
         /// Normal use of this dictionary will be something like:
-        /// 
+        ///
         /// MediaBlocks["print"]["strong"].Properties
-        /// 
+        ///
         /// - Or -
-        /// 
+        ///
         /// MediaBlocks["all"]["strong"].Properties
         /// </remarks>
         public Dictionary<string, Dictionary<string, CssBlock>> MediaBlocks
@@ -109,7 +110,7 @@ namespace MetroFramework.Drawing.Html
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if antialiasing should be avoided 
+        /// Gets or sets a value indicating if antialiasing should be avoided
         /// for geometry like backgrounds and borders
         /// </summary>
         public bool AvoidGeometryAntialias
@@ -146,8 +147,7 @@ namespace MetroFramework.Drawing.Html
             set { _scrollOffset = value; }
         }
 
-
-        #endregion
+        #endregion Props
 
         #region Methods
 
@@ -168,14 +168,14 @@ namespace MetroFramework.Drawing.Html
             {
                 stylesheet = stylesheet.Remove(comments[0].Index, comments[0].Length);
             }
-            
-            #endregion
+
+            #endregion Remove comments
 
             #region Extract @media blocks
 
             //MatchCollection atrules = Parser.Match(Parser.CssAtRules, stylesheet);
 
-            for(MatchCollection atrules = Parser.Match(Parser.CssAtRules, stylesheet); atrules.Count > 0; atrules = Parser.Match(Parser.CssAtRules, stylesheet))
+            for (MatchCollection atrules = Parser.Match(Parser.CssAtRules, stylesheet); atrules.Count > 0; atrules = Parser.Match(Parser.CssAtRules, stylesheet))
             {
                 Match match = atrules[0];
 
@@ -218,9 +218,10 @@ namespace MetroFramework.Drawing.Html
                 }
             }
 
-            #endregion
+            #endregion Extract @media blocks
 
             #region Extract general blocks
+
             //This blocks are added under the "all" keyword
 
             MatchCollection blocks = Parser.Match(Parser.CssBlocks, stylesheet);
@@ -230,7 +231,7 @@ namespace MetroFramework.Drawing.Html
                 FeedStyleBlock("all", match.Value);
             }
 
-            #endregion
+            #endregion Extract general blocks
         }
 
         /// <summary>
@@ -260,7 +261,7 @@ namespace MetroFramework.Drawing.Html
 
             for (int i = 0; i < classes.Length; i++)
             {
-                string className = classes[i].Trim(); if(string.IsNullOrEmpty(className)) continue;
+                string className = classes[i].Trim(); if (string.IsNullOrEmpty(className)) continue;
 
                 CssBlock newblock = new CssBlock(blockSource);
 
@@ -314,19 +315,19 @@ namespace MetroFramework.Drawing.Html
                     CssAnonymousBox abox = new CssAnonymousBox(curBox);
                     abox.Text = text;
                 }
-                else if(text != null && text.Length > 0)
+                else if (text != null && text.Length > 0)
                 {
                     CssAnonymousSpaceBox sbox = new CssAnonymousSpaceBox(curBox);
                     sbox.Text = text;
                 }
 
                 HtmlTag tag = new HtmlTag(tagmatch.Value);
-                
+
                 if (tag.IsClosing)
                 {
                     curBox = FindParent(tag.TagName, curBox);
                 }
-                else if(tag.IsSingle)
+                else if (tag.IsSingle)
                 {
                     CssBox foo = new CssBox(curBox, tag);
                 }
@@ -335,12 +336,10 @@ namespace MetroFramework.Drawing.Html
                     curBox = new CssBox(curBox, tag);
                 }
 
-                
-
                 lastEnd = tagmatch.Index + tagmatch.Length - 1;
-            }               
-            
-            string finaltext = DocumentSource.Substring((lastEnd > 0 ? lastEnd + 1 : 0), DocumentSource.Length - lastEnd - 1 + (lastEnd == 0 ? 1 : 0)) ;
+            }
+
+            string finaltext = DocumentSource.Substring((lastEnd > 0 ? lastEnd + 1 : 0), DocumentSource.Length - lastEnd - 1 + (lastEnd == 0 ? 1 : 0));
 
             if (!string.IsNullOrEmpty(finaltext))
             {
@@ -395,7 +394,7 @@ namespace MetroFramework.Drawing.Html
                     {
                         MediaBlocks["all"]["." + b.HtmlTag.Attributes["class"]].AssignTo(b);
                     }
-                    
+
                     b.HtmlTag.TranslateAttributes(b);
 
                     //Check for the style="" attribute
@@ -410,7 +409,7 @@ namespace MetroFramework.Drawing.Html
                         b.Boxes.Count == 1)
                     {
                         FeedStyleSheet(b.Boxes[0].Text);
-                    } 
+                    }
 
                     //Check for the <link rel=stylesheet> tag
                     if (b.HtmlTag.TagName.Equals("link", StringComparison.CurrentCultureIgnoreCase) &&
@@ -430,11 +429,10 @@ namespace MetroFramework.Drawing.Html
                     box.Display = CssConstants.Block;
                 }
             }
-            
         }
 
         /// <summary>
-        /// Makes block boxes be among only block boxes. 
+        /// Makes block boxes be among only block boxes.
         /// Inline boxes should live in a pool of Inline boxes only.
         /// </summary>
         /// <param name="startBox"></param>
@@ -444,7 +442,6 @@ namespace MetroFramework.Drawing.Html
 
             if (!inlinesonly)
             {
-
                 List<List<CssBox>> inlinegroups = BlockCorrection_GetInlineGroups(startBox);
 
                 foreach (List<CssBox> group in inlinegroups)
@@ -506,7 +503,6 @@ namespace MetroFramework.Drawing.Html
                 }
             }
 
-
             //If last list contains nothing, erase it
             if (result.Count > 0 && result[result.Count - 1].Count == 0)
             {
@@ -523,6 +519,6 @@ namespace MetroFramework.Drawing.Html
             base.MeasureBounds(g);
         }
 
-        #endregion
+        #endregion Methods
     }
 }

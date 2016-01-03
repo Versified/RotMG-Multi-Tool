@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MetroFramework.Components;
+using MetroFramework.Drawing;
+using MetroFramework.Interfaces;
+using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using MetroFramework.Interfaces;
-using MetroFramework.Components;
-using MetroFramework;
-using MetroFramework.Drawing;
-using MetroFramework.Controls;
 
 namespace MetroFramework.Controls
 {
     public partial class MetroGrid : DataGridView, IMetroControl
     {
         #region Interface
+
         [Category("Metro Appearance")]
         public event EventHandler<MetroPaintEventArgs> CustomPaintBackground;
+
         protected virtual void OnCustomPaintBackground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintBackground != null)
@@ -28,6 +25,7 @@ namespace MetroFramework.Controls
 
         [Category("Metro Appearance")]
         public event EventHandler<MetroPaintEventArgs> CustomPaint;
+
         protected virtual void OnCustomPaint(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaint != null)
@@ -38,6 +36,7 @@ namespace MetroFramework.Controls
 
         [Category("Metro Appearance")]
         public event EventHandler<MetroPaintEventArgs> CustomPaintForeground;
+
         protected virtual void OnCustomPaintForeground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintForeground != null)
@@ -47,6 +46,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroColorStyle metroStyle = MetroColorStyle.Default;
+
         [Category("Metro Appearance")]
         [DefaultValue(MetroColorStyle.Default)]
         public MetroColorStyle Style
@@ -73,6 +73,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroThemeStyle metroTheme = MetroThemeStyle.Default;
+
         [Category("Metro Appearance")]
         [DefaultValue(MetroThemeStyle.Default)]
         public MetroThemeStyle Theme
@@ -99,6 +100,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroStyleManager metroStyleManager = null;
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MetroStyleManager StyleManager
@@ -108,6 +110,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomBackColor = false;
+
         [DefaultValue(false)]
         [Category("Metro Appearance")]
         public bool UseCustomBackColor
@@ -117,6 +120,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomForeColor = false;
+
         [DefaultValue(false)]
         [Category("Metro Appearance")]
         public bool UseCustomForeColor
@@ -126,6 +130,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useStyleColors = false;
+
         [DefaultValue(false)]
         [Category("Metro Appearance")]
         public bool UseStyleColors
@@ -142,17 +147,20 @@ namespace MetroFramework.Controls
             get { return GetStyle(ControlStyles.Selectable); }
             set { SetStyle(ControlStyles.Selectable, value); }
         }
-        #endregion
+
+        #endregion Interface
 
         #region Properties
-        float _offset = 0.2F;
+
+        private float _offset = 0.2F;
+
         [DefaultValue(0.2F)]
         public float HighLightPercentage { get { return _offset; } set { _offset = value; } }
-        #endregion
 
-        MetroDataGridHelper scrollhelper = null;
-        MetroDataGridHelper scrollhelperH = null;
+        #endregion Properties
 
+        private MetroDataGridHelper scrollhelper = null;
+        private MetroDataGridHelper scrollhelperH = null;
 
         public MetroGrid()
         {
@@ -175,7 +183,6 @@ namespace MetroFramework.Controls
             this.DoubleBuffered = true;
         }
 
-
         protected override void OnMouseWheel(MouseEventArgs e)
         {
             base.OnMouseWheel(e);
@@ -189,7 +196,7 @@ namespace MetroFramework.Controls
                 {
                     this.FirstDisplayedScrollingRowIndex++;
                 }
-            }       
+            }
         }
 
         private void StyleGrid()
@@ -249,15 +256,16 @@ namespace MetroFramework.Controls
         private int _ignoreScrollbarChange = 0;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         private bool _ishorizontal = false;
+
         private HScrollBar hScrollbar = null;
         private VScrollBar vScrollbar = null;
 
         public MetroDataGridHelper(MetroScrollBar scrollbar, DataGridView grid)
         {
-            new MetroDataGridHelper(scrollbar, grid,true);
+            new MetroDataGridHelper(scrollbar, grid, true);
         }
 
         public MetroDataGridHelper(MetroScrollBar scrollbar, DataGridView grid, bool vertical)
@@ -290,22 +298,22 @@ namespace MetroFramework.Controls
             UpdateScrollbar();
         }
 
-        void _grid_Scroll(object sender, ScrollEventArgs e)
+        private void _grid_Scroll(object sender, ScrollEventArgs e)
         {
             UpdateScrollbar();
         }
 
-        void _grid_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        private void _grid_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
             UpdateScrollbar();
         }
 
-        void _grid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        private void _grid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             UpdateScrollbar();
         }
 
-        void _scrollbar_Scroll(object sender, System.Windows.Forms.ScrollEventArgs e)
+        private void _scrollbar_Scroll(object sender, System.Windows.Forms.ScrollEventArgs e)
         {
             if (_ignoreScrollbarChange > 0) return;
 
@@ -324,9 +332,10 @@ namespace MetroFramework.Controls
                 if (_scrollbar.Value >= 0 && _scrollbar.Value < _grid.Rows.Count)
                 {
                     _grid.FirstDisplayedScrollingRowIndex = _scrollbar.Value + (_scrollbar.Value == 1 ? -1 : 1) >= _grid.Rows.Count ? _grid.Rows.Count - 1 : _scrollbar.Value + (_scrollbar.Value == 1 ? -1 : 1);
-                }  else
+                }
+                else
                 {
-                    _grid.FirstDisplayedScrollingRowIndex = _scrollbar.Value -1;
+                    _grid.FirstDisplayedScrollingRowIndex = _scrollbar.Value - 1;
                 }
             }
 
@@ -376,7 +385,7 @@ namespace MetroFramework.Controls
                     _scrollbar.Value = _grid.FirstDisplayedScrollingRowIndex;
                     if (_grid.RowCount > 0 && _grid.Rows[_grid.RowCount - 1].Cells[0].Displayed)
                     {
-                        _scrollbar.Value =  _grid.RowCount;
+                        _scrollbar.Value = _grid.RowCount;
                     }
                     _scrollbar.Location = new Point(_grid.Width - _scrollbar.ScrollbarSize, 0);
                     _scrollbar.Height = _grid.Height - (hScrollbar.Visible ? _scrollbar.ScrollbarSize : 0);
@@ -400,7 +409,7 @@ namespace MetroFramework.Controls
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         private int VisibleFlexGridCols()
@@ -434,15 +443,16 @@ namespace MetroFramework.Controls
 
         #region Events of interest
 
-        void _grid_Resize(object sender, EventArgs e)
+        private void _grid_Resize(object sender, EventArgs e)
         {
             UpdateScrollbar();
         }
 
-        void _grid_AfterDataRefresh(object sender, System.ComponentModel.ListChangedEventArgs e)
+        private void _grid_AfterDataRefresh(object sender, System.ComponentModel.ListChangedEventArgs e)
         {
             UpdateScrollbar();
         }
-        #endregion
+
+        #endregion Events of interest
     }
 }

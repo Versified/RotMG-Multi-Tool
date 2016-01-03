@@ -1,35 +1,35 @@
-﻿/**
- * MetroFramework - Modern UI for WinForms
- * 
- * The MIT License (MIT)
- * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
- * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.ComponentModel;
-using System.Windows.Forms;
-
-using MetroFramework.Components;
+﻿using MetroFramework.Components;
 using MetroFramework.Drawing;
 using MetroFramework.Interfaces;
+
+/**
+ * MetroFramework - Modern UI for WinForms
+ *
+ * The MIT License (MIT)
+ * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the
+ * following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace MetroFramework.Controls
 {
@@ -41,6 +41,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaintBackground;
+
         protected virtual void OnCustomPaintBackground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintBackground != null)
@@ -51,6 +52,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaint;
+
         protected virtual void OnCustomPaint(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaint != null)
@@ -61,6 +63,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaintForeground;
+
         protected virtual void OnCustomPaintForeground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintForeground != null)
@@ -70,6 +73,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroColorStyle metroStyle = MetroColorStyle.Default;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(MetroColorStyle.Default)]
         public MetroColorStyle Style
@@ -96,6 +100,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroThemeStyle metroTheme = MetroThemeStyle.Default;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(MetroThemeStyle.Default)]
         public MetroThemeStyle Theme
@@ -122,6 +127,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroStyleManager metroStyleManager = null;
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MetroStyleManager StyleManager
@@ -131,6 +137,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomBackColor = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseCustomBackColor
@@ -140,6 +147,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomForeColor = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseCustomForeColor
@@ -149,6 +157,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useStyleColors = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseStyleColors
@@ -166,11 +175,12 @@ namespace MetroFramework.Controls
             set { SetStyle(ControlStyles.Selectable, value); }
         }
 
-        #endregion
+        #endregion Interface
 
         #region Fields
 
         private bool displayFocusRectangle = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool DisplayFocus
@@ -180,6 +190,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroCheckBoxSize metroCheckBoxSize = MetroCheckBoxSize.Small;
+
         [DefaultValue(MetroCheckBoxSize.Small)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroCheckBoxSize FontSize
@@ -189,6 +200,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroCheckBoxWeight metroCheckBoxWeight = MetroCheckBoxWeight.Regular;
+
         [DefaultValue(MetroCheckBoxWeight.Regular)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroCheckBoxWeight FontWeight
@@ -214,7 +226,7 @@ namespace MetroFramework.Controls
         private bool isPressed = false;
         private bool isFocused = false;
 
-        #endregion
+        #endregion Fields
 
         #region Constructor
 
@@ -226,7 +238,7 @@ namespace MetroFramework.Controls
                      ControlStyles.UserPaint, true);
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Paint Methods
 
@@ -336,7 +348,6 @@ namespace MetroFramework.Controls
 
             if (Checked)
             {
-
                 Color fillColor = CheckState == CheckState.Indeterminate ? borderColor : MetroPaint.GetStyleColor(Style);
 
                 using (SolidBrush b = new SolidBrush(fillColor))
@@ -355,7 +366,7 @@ namespace MetroFramework.Controls
                 ControlPaint.DrawFocusRectangle(e.Graphics, ClientRectangle);
         }
 
-        #endregion
+        #endregion Paint Methods
 
         #region Focus Methods
 
@@ -397,7 +408,7 @@ namespace MetroFramework.Controls
             base.OnLeave(e);
         }
 
-        #endregion
+        #endregion Focus Methods
 
         #region Keyboard Methods
 
@@ -423,7 +434,7 @@ namespace MetroFramework.Controls
             base.OnKeyUp(e);
         }
 
-        #endregion
+        #endregion Keyboard Methods
 
         #region Mouse Methods
 
@@ -467,7 +478,7 @@ namespace MetroFramework.Controls
             base.OnMouseLeave(e);
         }
 
-        #endregion
+        #endregion Mouse Methods
 
         #region Overridden Methods
 
@@ -498,6 +509,6 @@ namespace MetroFramework.Controls
             return preferredSize;
         }
 
-        #endregion
+        #endregion Overridden Methods
     }
 }

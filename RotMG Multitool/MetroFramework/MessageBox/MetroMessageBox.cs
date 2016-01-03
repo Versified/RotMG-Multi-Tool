@@ -1,12 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Media;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using MetroFramework.Forms;
-using MetroFramework.Interfaces;
 
 namespace MetroFramework
 {
@@ -32,7 +28,7 @@ namespace MetroFramework
         /// <param name="message"></param>
         /// <param name="height" optional=211></param>
         /// <returns></returns>
-        public static DialogResult Show(IWin32Window owner, String message,int height)
+        public static DialogResult Show(IWin32Window owner, String message, int height)
         { return Show(owner, message, "Notification", height); }
 
         /// <summary>
@@ -146,7 +142,7 @@ namespace MetroFramework
             if (owner != null)
             {
                 Form _owner = (owner as Form == null) ? ((UserControl)owner).ParentForm : (Form)owner;
-                
+
                 //int _minWidth = 500;
                 //int _minHeight = 350;
 
@@ -188,7 +184,7 @@ namespace MetroFramework
                 _control.Properties.Title = title;
                 _control.Padding = new Padding(0, 0, 0, 0);
                 _control.ControlBox = false;
-                _control.ShowInTaskbar = false;                
+                _control.ShowInTaskbar = false;
                 //_owner.Controls.Add(_control);
                 //if (_owner is IMetroForm)
                 //{
@@ -220,7 +216,7 @@ namespace MetroFramework
                     while (!_asyncresult.IsCompleted)
                     { Thread.Sleep(1); Application.DoEvents(); }
                 }
-                catch 
+                catch
                 {
                     _cancelled = true;
 
@@ -239,7 +235,6 @@ namespace MetroFramework
                     //_owner.Controls.Remove(_control);
                     _control.Dispose(); _control = null;
                 }
-                 
             }
 
             return _result;
@@ -250,6 +245,5 @@ namespace MetroFramework
             while (control.Visible)
             { }
         }
-
     }
 }

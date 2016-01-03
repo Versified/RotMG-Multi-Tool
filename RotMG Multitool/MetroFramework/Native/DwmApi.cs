@@ -1,26 +1,27 @@
 ﻿/**
  * MetroFramework - Modern UI for WinForms
- * 
+ *
  * The MIT License (MIT)
  * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the
  * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
+ *
+ * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -38,10 +39,13 @@ namespace MetroFramework.Native
         {
             [FieldOffset(12)]
             public int bottom;
+
             [FieldOffset(0)]
             public int left;
+
             [FieldOffset(8)]
             public int right;
+
             [FieldOffset(4)]
             public int top;
 
@@ -101,6 +105,7 @@ namespace MetroFramework.Native
             {
                 get { return (this.right - this.left); }
             }
+
             private static T InlineAssignHelper<T>(ref T target, T value)
             {
                 target = value;
@@ -192,6 +197,7 @@ namespace MetroFramework.Native
             public int cxRightWidth;
             public int cyTopHeight;
             public int cyBottomHeight;
+
             public MARGINS(int Left, int Right, int Top, int Bottom)
             {
                 this.cxLeftWidth = Left;
@@ -208,7 +214,7 @@ namespace MetroFramework.Native
             public uint Mask;
         }
 
-        #endregion
+        #endregion Structs
 
         #region Enums
 
@@ -244,7 +250,7 @@ namespace MetroFramework.Native
             WTA_NONCLIENT = 1
         }
 
-        #endregion
+        #endregion Enums
 
         #region Fields
 
@@ -269,44 +275,61 @@ namespace MetroFramework.Native
 
         public const int WM_DWMCOMPOSITIONCHANGED = 0x31e;
 
-        #endregion
+        #endregion Fields
 
         #region API Calls
 
         [DllImport("dwmapi.dll")]
         public static extern int DwmDefWindowProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref IntPtr result);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmEnableComposition(int fEnable);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmEnableMMCSS(int fEnableMMCSS);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmExtendFrameIntoClientArea(IntPtr hdc, ref MARGINS marInset);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmGetColorizationColor(ref int pcrColorization, ref int pfOpaqueBlend);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmGetCompositionTimingInfo(IntPtr hwnd, ref DWM_TIMING_INFO pTimingInfo);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmGetWindowAttribute(IntPtr hwnd, int dwAttribute, IntPtr pvAttribute, int cbAttribute);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmIsCompositionEnabled(ref int pfEnabled);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmIsCompositionEnabled(out bool pfEnabled);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmModifyPreviousDxFrameDuration(IntPtr hwnd, int cRefreshes, int fRelative);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmQueryThumbnailSourceSize(IntPtr hThumbnail, ref Size pSize);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmRegisterThumbnail(IntPtr hwndDestination, IntPtr hwndSource, ref Size pMinimizedSize, ref IntPtr phThumbnailId);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmSetDxFrameDuration(IntPtr hwnd, int cRefreshes);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmSetPresentParameters(IntPtr hwnd, ref DWM_PRESENT_PARAMETERS pPresentParams);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmSetWindowAttribute(IntPtr hwnd, int dwAttribute, IntPtr pvAttribute, int cbAttribute);
+
         [DllImport("dwmapi.dll", PreserveSig = true)]
         public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmUnregisterThumbnail(IntPtr hThumbnailId);
+
         [DllImport("dwmapi.dll")]
         public static extern int DwmUpdateThumbnailProperties(IntPtr hThumbnailId, ref DWM_THUMBNAIL_PROPERTIES ptnProperties);
 
@@ -316,6 +339,6 @@ namespace MetroFramework.Native
         [DllImport("uxtheme.dll")]
         public static extern int SetWindowThemeAttribute(IntPtr hWnd, WindowThemeAttributeType wtype, ref WTA_OPTIONS attributes, uint size);
 
-        #endregion
+        #endregion API Calls
     }
 }

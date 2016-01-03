@@ -1,26 +1,27 @@
 ﻿/**
  * MetroFramework - Modern UI for WinForms
- * 
+ *
  * The MIT License (MIT)
  * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the
  * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
+ *
+ * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -815,7 +816,7 @@ namespace MetroFramework.Drawing
 
                 case MetroColorStyle.White:
                     return MetroPens.White;
-                
+
                 case MetroColorStyle.Silver:
                     return MetroPens.Silver;
 
@@ -868,10 +869,12 @@ namespace MetroFramework.Drawing
                     stringFormat.Alignment = StringAlignment.Near;
                     stringFormat.LineAlignment = StringAlignment.Near;
                     break;
+
                 case ContentAlignment.TopCenter:
                     stringFormat.Alignment = StringAlignment.Center;
                     stringFormat.LineAlignment = StringAlignment.Near;
                     break;
+
                 case ContentAlignment.TopRight:
                     stringFormat.Alignment = StringAlignment.Far;
                     stringFormat.LineAlignment = StringAlignment.Near;
@@ -881,10 +884,12 @@ namespace MetroFramework.Drawing
                     stringFormat.Alignment = StringAlignment.Center;
                     stringFormat.LineAlignment = StringAlignment.Near;
                     break;
+
                 case ContentAlignment.MiddleCenter:
                     stringFormat.Alignment = StringAlignment.Center;
                     stringFormat.LineAlignment = StringAlignment.Center;
                     break;
+
                 case ContentAlignment.MiddleRight:
                     stringFormat.Alignment = StringAlignment.Center;
                     stringFormat.LineAlignment = StringAlignment.Far;
@@ -894,10 +899,12 @@ namespace MetroFramework.Drawing
                     stringFormat.Alignment = StringAlignment.Far;
                     stringFormat.LineAlignment = StringAlignment.Near;
                     break;
+
                 case ContentAlignment.BottomCenter:
                     stringFormat.Alignment = StringAlignment.Far;
                     stringFormat.LineAlignment = StringAlignment.Center;
                     break;
+
                 case ContentAlignment.BottomRight:
                     stringFormat.Alignment = StringAlignment.Far;
                     stringFormat.LineAlignment = StringAlignment.Far;
@@ -912,7 +919,7 @@ namespace MetroFramework.Drawing
             return GetTextFormatFlags(textAlign, false);
         }
 
-        public static TextFormatFlags GetTextFormatFlags(ContentAlignment textAlign,bool WrapToLine)
+        public static TextFormatFlags GetTextFormatFlags(ContentAlignment textAlign, bool WrapToLine)
         {
             TextFormatFlags controlFlags = TextFormatFlags.Default;
 
@@ -921,6 +928,7 @@ namespace MetroFramework.Drawing
                 case true:
                     controlFlags = TextFormatFlags.WordBreak;
                     break;
+
                 case false:
                     controlFlags = TextFormatFlags.EndEllipsis;
                     break;
@@ -930,9 +938,11 @@ namespace MetroFramework.Drawing
                 case ContentAlignment.TopLeft:
                     controlFlags |= TextFormatFlags.Top | TextFormatFlags.Left;
                     break;
+
                 case ContentAlignment.TopCenter:
                     controlFlags |= TextFormatFlags.Top | TextFormatFlags.HorizontalCenter;
                     break;
+
                 case ContentAlignment.TopRight:
                     controlFlags |= TextFormatFlags.Top | TextFormatFlags.Right;
                     break;
@@ -940,9 +950,11 @@ namespace MetroFramework.Drawing
                 case ContentAlignment.MiddleLeft:
                     controlFlags |= TextFormatFlags.VerticalCenter | TextFormatFlags.Left;
                     break;
+
                 case ContentAlignment.MiddleCenter:
                     controlFlags |= TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter;
                     break;
+
                 case ContentAlignment.MiddleRight:
                     controlFlags |= TextFormatFlags.VerticalCenter | TextFormatFlags.Right;
                     break;
@@ -950,9 +962,11 @@ namespace MetroFramework.Drawing
                 case ContentAlignment.BottomLeft:
                     controlFlags |= TextFormatFlags.Bottom | TextFormatFlags.Left;
                     break;
+
                 case ContentAlignment.BottomCenter:
                     controlFlags |= TextFormatFlags.Bottom | TextFormatFlags.HorizontalCenter;
                     break;
+
                 case ContentAlignment.BottomRight:
                     controlFlags |= TextFormatFlags.Bottom | TextFormatFlags.Right;
                     break;
@@ -961,6 +975,6 @@ namespace MetroFramework.Drawing
             return controlFlags;
         }
 
-        #endregion
+        #endregion Helper Methods
     }
 }

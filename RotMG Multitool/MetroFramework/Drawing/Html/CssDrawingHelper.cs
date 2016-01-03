@@ -1,34 +1,33 @@
+using System.Drawing;
+
 /**
  * A Professional HTML Renderer You Will Use
- * 
+ *
  * The BSD License (BSD)
  * Copyright (c) 2011 Jose Menendez Póo, http://www.codeproject.com/Articles/32376/A-Professional-HTML-Renderer-You-Will-Use
- * 
- * Redistribution and use in source and binary forms, with or without modification, are 
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
  * permitted provided that the following conditions are met:
- * 
- * Redistributions of source code must retain the above copyright notice, this list of 
+ *
+ * Redistributions of source code must retain the above copyright notice, this list of
  * conditions and the following disclaimer.
- * 
- * Redistributions in binary form must reproduce the above copyright notice, this list of 
- * conditions and the following disclaimer in the documentation and/or other materials 
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this list of
+ * conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED 
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 using System.Drawing.Drawing2D;
-using System.Drawing;
 
 namespace MetroFramework.Drawing.Html
 {
@@ -97,20 +96,21 @@ namespace MetroFramework.Drawing.Html
                     if (isLineStart && b.ActualCornerNW == 0f) pts[3].X += b.ActualBorderLeftWidth;
 
                     if (b.ActualCornerNW > 0f) corner = CreateCorner(b, r, 1);
-                    
+
                     break;
+
                 case Border.Right:
                     bwidth = b.ActualBorderRightWidth;
                     pts[0] = RoundP(new PointF(r.Right - bwidth, r.Top + b.ActualCornerNE), b);
                     pts[1] = RoundP(new PointF(r.Right, r.Top + b.ActualCornerNE), b);
                     pts[2] = RoundP(new PointF(r.Right, r.Bottom - b.ActualCornerSE), b);
                     pts[3] = RoundP(new PointF(r.Right - bwidth, r.Bottom - b.ActualCornerSE), b);
-                    
-                   
+
                     if (b.ActualCornerNE == 0f) pts[0].Y += b.ActualBorderTopWidth;
-                    if (b.ActualCornerSE == 0f) pts[3].Y -= b.ActualBorderBottomWidth; 
+                    if (b.ActualCornerSE == 0f) pts[3].Y -= b.ActualBorderBottomWidth;
                     if (b.ActualCornerNE > 0f) corner = CreateCorner(b, r, 2);
                     break;
+
                 case Border.Bottom:
                     bwidth = b.ActualBorderBottomWidth;
                     pts[0] = RoundP(new PointF(r.Left + b.ActualCornerSW, r.Bottom - bwidth), b);
@@ -123,6 +123,7 @@ namespace MetroFramework.Drawing.Html
 
                     if (b.ActualCornerSE > 0f) corner = CreateCorner(b, r, 3);
                     break;
+
                 case Border.Left:
                     bwidth = b.ActualBorderLeftWidth;
                     pts[0] = RoundP(new PointF(r.Left, r.Top + b.ActualCornerNW), b);
@@ -172,6 +173,7 @@ namespace MetroFramework.Drawing.Html
                     start1 = 180;
                     start2 = 270;
                     break;
+
                 case 2:
                     outer = new RectangleF(r.Right - b.ActualCornerNE, r.Top, b.ActualCornerNE, b.ActualCornerNE);
                     inner = RectangleF.FromLTRB(outer.Left, outer.Top + b.ActualBorderTopWidth, outer.Right - b.ActualBorderRightWidth, outer.Bottom);
@@ -180,6 +182,7 @@ namespace MetroFramework.Drawing.Html
                     start1 = -90;
                     start2 = 0;
                     break;
+
                 case 3:
                     outer = RectangleF.FromLTRB(r.Right - b.ActualCornerSE, r.Bottom - b.ActualCornerSE, r.Right, r.Bottom);
                     inner = new RectangleF(outer.Left, outer.Top, outer.Width - b.ActualBorderRightWidth, outer.Height - b.ActualBorderBottomWidth);
@@ -190,9 +193,10 @@ namespace MetroFramework.Drawing.Html
                     start1 = 0;
                     start2 = 90;
                     break;
+
                 case 4:
                     outer = new RectangleF(r.Left, r.Bottom - b.ActualCornerSW, b.ActualCornerSW, b.ActualCornerSW);
-                    inner = RectangleF.FromLTRB( r.Left + b.ActualBorderLeftWidth , outer.Top , outer.Right, outer.Bottom - b.ActualBorderBottomWidth);
+                    inner = RectangleF.FromLTRB(r.Left + b.ActualBorderLeftWidth, outer.Top, outer.Right, outer.Bottom - b.ActualBorderBottomWidth);
                     start1 = 90;
                     start2 = 180;
                     outer.Y -= outer.Height;
@@ -204,7 +208,6 @@ namespace MetroFramework.Drawing.Html
             if (outer.Height <= 0f) outer.Height = 1f;
             if (inner.Width <= 0f) inner.Width = 1f;
             if (inner.Height <= 0f) inner.Height = 1f;
-
 
             outer.Width *= 2; outer.Height *= 2;
             inner.Width *= 2; inner.Height *= 2;
@@ -244,7 +247,7 @@ namespace MetroFramework.Drawing.Html
 
             //NW ---- NE
             path.AddLine(rect.X + nwRadius, rect.Y, rect.Right - neRadius, rect.Y);
-            
+
             //NE Arc
             if (neRadius > 0f)
             {

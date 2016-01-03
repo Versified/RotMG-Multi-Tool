@@ -1,41 +1,40 @@
-/**
- * MetroFramework - Modern UI for WinForms
- * 
- * The MIT License (MIT)
- * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
- * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Security;
-using System.Windows.Forms;
-
 using MetroFramework.Components;
 using MetroFramework.Drawing;
 using MetroFramework.Interfaces;
 using MetroFramework.Native;
+
+/**
+ * MetroFramework - Modern UI for WinForms
+ *
+ * The MIT License (MIT)
+ * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the
+ * following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Security;
+using System.Windows.Forms;
 
 namespace MetroFramework.Forms
 {
@@ -71,13 +70,14 @@ namespace MetroFramework.Forms
         BottomRight
     }
 
-    #endregion
+    #endregion Enums
 
     public class MetroForm : Form, IMetroForm, IDisposable
     {
         #region Interface
 
         private MetroColorStyle metroStyle = MetroColorStyle.Blue;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroColorStyle Style
         {
@@ -107,6 +107,7 @@ namespace MetroFramework.Forms
         }
 
         private MetroStyleManager metroStyleManager = null;
+
         [Browsable(false)]
         public MetroStyleManager StyleManager
         {
@@ -114,11 +115,12 @@ namespace MetroFramework.Forms
             set { metroStyleManager = value; }
         }
 
-        #endregion
+        #endregion Interface
 
         #region Fields
 
         private MetroFormTextAlign textAlign = MetroFormTextAlign.Left;
+
         [Browsable(true)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroFormTextAlign TextAlign
@@ -134,6 +136,7 @@ namespace MetroFramework.Forms
         }
 
         private MetroFormBorderStyle formBorderStyle = MetroFormBorderStyle.None;
+
         [DefaultValue(MetroFormBorderStyle.None)]
         [Browsable(true)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
@@ -144,6 +147,7 @@ namespace MetroFramework.Forms
         }
 
         private bool isMovable = true;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool Movable
         {
@@ -167,6 +171,7 @@ namespace MetroFramework.Forms
         }
 
         private bool displayHeader = true;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(true)]
         public bool DisplayHeader
@@ -185,6 +190,7 @@ namespace MetroFramework.Forms
         }
 
         private bool isResizable = true;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool Resizable
         {
@@ -193,6 +199,7 @@ namespace MetroFramework.Forms
         }
 
         private MetroFormShadowType shadowType = MetroFormShadowType.Flat;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(MetroFormShadowType.Flat)]
         public MetroFormShadowType ShadowType
@@ -227,6 +234,7 @@ namespace MetroFramework.Forms
 
         private Bitmap _image = null;
         private Image backImage;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(null)]
         public Image BackImage
@@ -241,6 +249,7 @@ namespace MetroFramework.Forms
         }
 
         private Padding backImagePadding;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public Padding BackImagePadding
         {
@@ -253,6 +262,7 @@ namespace MetroFramework.Forms
         }
 
         private int backMaxSize;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public int BackMaxSize
         {
@@ -265,6 +275,7 @@ namespace MetroFramework.Forms
         }
 
         private BackLocation backLocation;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(BackLocation.TopLeft)]
         public BackLocation BackLocation
@@ -278,6 +289,7 @@ namespace MetroFramework.Forms
         }
 
         private bool _imageinvert;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(true)]
         public bool ApplyImageInvert
@@ -289,7 +301,8 @@ namespace MetroFramework.Forms
                 Refresh();
             }
         }
-        #endregion
+
+        #endregion Fields
 
         #region Constructor
 
@@ -316,7 +329,7 @@ namespace MetroFramework.Forms
             base.Dispose(disposing);
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Paint Methods
 
@@ -388,12 +401,15 @@ namespace MetroFramework.Forms
                     case BackLocation.TopLeft:
                         e.Graphics.DrawImage(img, 0 + backImagePadding.Left, 0 + backImagePadding.Top);
                         break;
+
                     case BackLocation.TopRight:
                         e.Graphics.DrawImage(img, ClientRectangle.Right - (backImagePadding.Right + img.Width), 0 + backImagePadding.Top);
                         break;
+
                     case BackLocation.BottomLeft:
                         e.Graphics.DrawImage(img, 0 + backImagePadding.Left, ClientRectangle.Bottom - (img.Height + backImagePadding.Bottom));
                         break;
+
                     case BackLocation.BottomRight:
                         e.Graphics.DrawImage(img, ClientRectangle.Right - (backImagePadding.Right + img.Width),
                                              ClientRectangle.Bottom - (img.Height + backImagePadding.Bottom));
@@ -437,7 +453,7 @@ namespace MetroFramework.Forms
             throw new InvalidOperationException();
         }
 
-        #endregion
+        #endregion Paint Methods
 
         #region Management Methods
 
@@ -475,6 +491,7 @@ namespace MetroFramework.Forms
                 case FormStartPosition.CenterParent:
                     CenterToParent();
                     break;
+
                 case FormStartPosition.CenterScreen:
                     if (IsMdiChild)
                     {
@@ -555,8 +572,10 @@ namespace MetroFramework.Forms
                         case (int)WinApi.Messages.SC_MOVE:
                             if (!Movable) return;
                             break;
+
                         case (int)WinApi.Messages.SC_MAXIMIZE:
                             break;
+
                         case (int)WinApi.Messages.SC_RESTORE:
                             break;
                     }
@@ -587,6 +606,7 @@ namespace MetroFramework.Forms
                 case (int)WinApi.Messages.WM_GETMINMAXINFO:
                     OnGetMinMaxInfo(m.HWnd, m.LParam);
                     break;
+
                 case (int)WinApi.Messages.WM_SIZE:
                     if (windowButtonList != null)
                     {
@@ -652,7 +672,6 @@ namespace MetroFramework.Forms
                     MoveControl();
                 }
             }
-
         }
 
         [SecuritySafeCritical]
@@ -677,7 +696,7 @@ namespace MetroFramework.Forms
             return Environment.OSVersion.Version.Major > 5 && SystemInformation.IsDropShadowEnabled;
         }
 
-        #endregion
+        #endregion Management Methods
 
         #region Window Buttons
 
@@ -805,6 +824,7 @@ namespace MetroFramework.Forms
 
             [Category(MetroDefaults.PropertyCategory.Appearance)]
             public event EventHandler<MetroPaintEventArgs> CustomPaintBackground;
+
             protected virtual void OnCustomPaintBackground(MetroPaintEventArgs e)
             {
                 if (GetStyle(ControlStyles.UserPaint) && CustomPaintBackground != null)
@@ -815,6 +835,7 @@ namespace MetroFramework.Forms
 
             [Category(MetroDefaults.PropertyCategory.Appearance)]
             public event EventHandler<MetroPaintEventArgs> CustomPaint;
+
             protected virtual void OnCustomPaint(MetroPaintEventArgs e)
             {
                 if (GetStyle(ControlStyles.UserPaint) && CustomPaint != null)
@@ -825,6 +846,7 @@ namespace MetroFramework.Forms
 
             [Category(MetroDefaults.PropertyCategory.Appearance)]
             public event EventHandler<MetroPaintEventArgs> CustomPaintForeground;
+
             protected virtual void OnCustomPaintForeground(MetroPaintEventArgs e)
             {
                 if (GetStyle(ControlStyles.UserPaint) && CustomPaintForeground != null)
@@ -834,6 +856,7 @@ namespace MetroFramework.Forms
             }
 
             private MetroColorStyle metroStyle = MetroColorStyle.Default;
+
             [Category(MetroDefaults.PropertyCategory.Appearance)]
             [DefaultValue(MetroColorStyle.Default)]
             public MetroColorStyle Style
@@ -860,6 +883,7 @@ namespace MetroFramework.Forms
             }
 
             private MetroThemeStyle metroTheme = MetroThemeStyle.Default;
+
             [Category(MetroDefaults.PropertyCategory.Appearance)]
             [DefaultValue(MetroThemeStyle.Default)]
             public MetroThemeStyle Theme
@@ -886,6 +910,7 @@ namespace MetroFramework.Forms
             }
 
             private MetroStyleManager metroStyleManager = null;
+
             [Browsable(false)]
             [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public MetroStyleManager StyleManager
@@ -895,6 +920,7 @@ namespace MetroFramework.Forms
             }
 
             private bool useCustomBackColor = false;
+
             [DefaultValue(false)]
             [Category(MetroDefaults.PropertyCategory.Appearance)]
             public bool UseCustomBackColor
@@ -904,6 +930,7 @@ namespace MetroFramework.Forms
             }
 
             private bool useCustomForeColor = false;
+
             [DefaultValue(false)]
             [Category(MetroDefaults.PropertyCategory.Appearance)]
             public bool UseCustomForeColor
@@ -913,6 +940,7 @@ namespace MetroFramework.Forms
             }
 
             private bool useStyleColors = false;
+
             [DefaultValue(false)]
             [Category(MetroDefaults.PropertyCategory.Appearance)]
             public bool UseStyleColors
@@ -930,14 +958,14 @@ namespace MetroFramework.Forms
                 set { SetStyle(ControlStyles.Selectable, value); }
             }
 
-            #endregion
+            #endregion Interface
 
             #region Fields
 
             private bool isHovered = false;
             private bool isPressed = false;
 
-            #endregion
+            #endregion Fields
 
             #region Constructor
 
@@ -949,7 +977,7 @@ namespace MetroFramework.Forms
                          ControlStyles.UserPaint, true);
             }
 
-            #endregion
+            #endregion Constructor
 
             #region Paint Methods
 
@@ -1004,7 +1032,7 @@ namespace MetroFramework.Forms
                 TextRenderer.DrawText(e.Graphics, Text, buttonFont, ClientRectangle, foreColor, backColor, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
             }
 
-            #endregion
+            #endregion Paint Methods
 
             #region Mouse Methods
 
@@ -1043,15 +1071,16 @@ namespace MetroFramework.Forms
                 base.OnMouseLeave(e);
             }
 
-            #endregion
+            #endregion Mouse Methods
         }
 
-        #endregion
+        #endregion Window Buttons
 
         #region Shadows
 
         private const int CS_DROPSHADOW = 0x20000;
-        const int WS_MINIMIZEBOX = 0x20000;
+        private const int WS_MINIMIZEBOX = 0x20000;
+
         protected override CreateParams CreateParams
         {
             get
@@ -1235,7 +1264,7 @@ namespace MetroFramework.Forms
                     PaintShadow();
             }
 
-            #endregion
+            #endregion Event Handlers
 
             #region Constants
 
@@ -1246,10 +1275,10 @@ namespace MetroFramework.Forms
             private const int TICKS_PER_MS = 10000;
             private const long RESIZE_REDRAW_INTERVAL = 1000 * TICKS_PER_MS;
 
-            #endregion
+            #endregion Constants
         }
 
-        #endregion
+        #endregion MetroShadowBase
 
         #region Aero DropShadow
 
@@ -1267,13 +1296,17 @@ namespace MetroFramework.Forms
                 base.SetBoundsCore(x, y, width, height, specified);
             }
 
-            protected override void PaintShadow() { Visible = true; }
+            protected override void PaintShadow()
+            {
+                Visible = true;
+            }
 
-            protected override void ClearShadow() { }
-
+            protected override void ClearShadow()
+            {
+            }
         }
 
-        #endregion
+        #endregion Aero DropShadow
 
         #region Flat DropShadow
 
@@ -1386,10 +1419,10 @@ namespace MetroFramework.Forms
                 return img;
             }
 
-            #endregion
+            #endregion Drawing methods
         }
 
-        #endregion
+        #endregion Flat DropShadow
 
         #region Realistic DropShadow
 
@@ -1451,12 +1484,12 @@ namespace MetroFramework.Forms
                     WinApi.POINT pointSource = new WinApi.POINT(0, 0);
                     WinApi.POINT topPos = new WinApi.POINT(Left, Top);
                     WinApi.BLENDFUNCTION blend = new WinApi.BLENDFUNCTION
-                        {
-                            BlendOp = WinApi.AC_SRC_OVER,
-                            BlendFlags = 0,
-                            SourceConstantAlpha = opacity,
-                            AlphaFormat = WinApi.AC_SRC_ALPHA
-                        };
+                    {
+                        BlendOp = WinApi.AC_SRC_OVER,
+                        BlendFlags = 0,
+                        SourceConstantAlpha = opacity,
+                        AlphaFormat = WinApi.AC_SRC_ALPHA
+                    };
 
                     WinApi.UpdateLayeredWindow(Handle, screenDc, ref topPos, ref size, memDc, ref pointSource, 0, ref blend, WinApi.ULW_ALPHA);
                 }
@@ -1504,7 +1537,6 @@ namespace MetroFramework.Forms
                     DrawRoundedRectangle(g, rOutput, currentBlur, Pens.Transparent, shadowColor);
                     rInner.Inflate(1, 1);
                     currentBlur = (int)((double)blur * (1 - (transparency * transparency)));
-
                 } while (rOuter.Contains(rInner));
 
                 g.Flush();
@@ -1551,12 +1583,12 @@ namespace MetroFramework.Forms
                 }
             }
 
-            #endregion
+            #endregion Drawing methods
         }
 
-        #endregion
+        #endregion Realistic DropShadow
 
-        #endregion
+        #endregion Shadows
 
         #region Helper Methods
 
@@ -1581,6 +1613,6 @@ namespace MetroFramework.Forms
             return new Rectangle(clientRectangle.X, clientRectangle.Y, actualSize.Width, actualSize.Height);
         }
 
-        #endregion
+        #endregion Helper Methods
     }
 }

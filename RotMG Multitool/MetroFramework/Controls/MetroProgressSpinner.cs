@@ -21,14 +21,13 @@
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
+using MetroFramework.Components;
+using MetroFramework.Drawing;
+using MetroFramework.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-
-using MetroFramework.Components;
-using MetroFramework.Drawing;
-using MetroFramework.Interfaces;
 
 namespace MetroFramework.Controls
 {
@@ -40,6 +39,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaintBackground;
+
         protected virtual void OnCustomPaintBackground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintBackground != null)
@@ -50,6 +50,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaint;
+
         protected virtual void OnCustomPaint(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaint != null)
@@ -60,6 +61,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaintForeground;
+
         protected virtual void OnCustomPaintForeground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintForeground != null)
@@ -69,6 +71,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroColorStyle metroStyle = MetroColorStyle.Default;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(MetroColorStyle.Default)]
         public MetroColorStyle Style
@@ -95,6 +98,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroThemeStyle metroTheme = MetroThemeStyle.Default;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(MetroThemeStyle.Default)]
         public MetroThemeStyle Theme
@@ -121,6 +125,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroStyleManager metroStyleManager = null;
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MetroStyleManager StyleManager
@@ -130,6 +135,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomBackColor = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseCustomBackColor
@@ -139,6 +145,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomForeColor = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseCustomForeColor
@@ -148,6 +155,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useStyleColors = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseStyleColors
@@ -165,7 +173,7 @@ namespace MetroFramework.Controls
             set { SetStyle(ControlStyles.Selectable, value); }
         }
 
-        #endregion
+        #endregion Interface
 
         #region Fields
 
@@ -196,6 +204,7 @@ namespace MetroFramework.Controls
         }
 
         private int minimum = 0;
+
         [DefaultValue(0)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public int Minimum
@@ -215,6 +224,7 @@ namespace MetroFramework.Controls
         }
 
         private int maximum = 100;
+
         [DefaultValue(0)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public int Maximum
@@ -232,6 +242,7 @@ namespace MetroFramework.Controls
         }
 
         private bool ensureVisible = true;
+
         [DefaultValue(true)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool EnsureVisible
@@ -241,6 +252,7 @@ namespace MetroFramework.Controls
         }
 
         private float speed;
+
         [DefaultValue(1f)]
         [Category(MetroDefaults.PropertyCategory.Behaviour)]
         public float Speed
@@ -256,6 +268,7 @@ namespace MetroFramework.Controls
         }
 
         private bool backwards;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Behaviour)]
         public bool Backwards
@@ -265,6 +278,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomBackground = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool CustomBackground
@@ -273,7 +287,7 @@ namespace MetroFramework.Controls
             set { useCustomBackground = value; }
         }
 
-        #endregion
+        #endregion Fields
 
         #region Constructor
 
@@ -290,7 +304,7 @@ namespace MetroFramework.Controls
             DoubleBuffered = true;
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Public Methods
 
@@ -301,7 +315,7 @@ namespace MetroFramework.Controls
             Refresh();
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Management Methods
 
@@ -314,7 +328,7 @@ namespace MetroFramework.Controls
             }
         }
 
-        #endregion
+        #endregion Management Methods
 
         #region Paint Methods
 
@@ -447,6 +461,6 @@ namespace MetroFramework.Controls
             OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, foreColor, e.Graphics));
         }
 
-        #endregion
+        #endregion Paint Methods
     }
 }

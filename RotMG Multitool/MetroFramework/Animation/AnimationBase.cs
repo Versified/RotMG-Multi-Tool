@@ -1,37 +1,40 @@
 ﻿/**
  * MetroFramework - Modern UI for WinForms
- * 
+ *
  * The MIT License (MIT)
  * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the
  * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
+ *
+ * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 using System;
 using System.Windows.Forms;
 
 namespace MetroFramework.Animation
 {
     public delegate void AnimationAction();
+
     public delegate bool AnimationFinishedEvaluator();
 
     public abstract class AnimationBase
     {
         public event EventHandler AnimationCompleted;
+
         private void OnAnimationCompleted()
         {
             if (AnimationCompleted != null)
@@ -49,7 +52,7 @@ namespace MetroFramework.Animation
         protected int startTime;
         protected int targetTime;
 
-        public bool IsCompleted 
+        public bool IsCompleted
         {
             get
             {
@@ -59,7 +62,8 @@ namespace MetroFramework.Animation
                 return true;
             }
         }
-        public bool IsRunning 
+
+        public bool IsRunning
         {
             get
             {
@@ -80,6 +84,7 @@ namespace MetroFramework.Animation
         {
             Start(control, transitionType, duration, actionHandler, null);
         }
+
         protected void Start(Control control, TransitionType transitionType, int duration, AnimationAction actionHandler, AnimationFinishedEvaluator evaluatorHandler)
         {
             this.targetControl = control;
@@ -114,7 +119,7 @@ namespace MetroFramework.Animation
             switch (transitionType)
             {
                 case TransitionType.Linear:
-                    // simple linear tweening - no easing 
+                    // simple linear tweening - no easing
                     return (int)(c * t / d + b);
 
                 case TransitionType.EaseInQuad:

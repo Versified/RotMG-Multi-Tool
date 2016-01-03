@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
+﻿using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace MetroFramework
@@ -11,7 +8,6 @@ namespace MetroFramework
     /// </summary>
     public class MetroMessageBoxProperties
     {
-
         /// <summary>
         /// Creates a new instance of MessageBoxOverlayProperties.
         /// </summary>
@@ -35,7 +31,7 @@ namespace MetroFramework
         /// Gets or sets the message box overlay icon.
         /// </summary>
         public MessageBoxIcon Icon
-        { get; set;  }
+        { get; set; }
 
         /// <summary>
         /// Gets or sets the message box overlay message contents.
@@ -57,6 +53,5 @@ namespace MetroFramework
         /// </summary>
         public string Title
         { get; set; }
-
     }
 }

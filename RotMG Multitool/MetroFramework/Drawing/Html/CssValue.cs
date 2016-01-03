@@ -1,38 +1,37 @@
 /**
  * A Professional HTML Renderer You Will Use
- * 
+ *
  * The BSD License (BSD)
  * Copyright (c) 2011 Jose Menendez Póo, http://www.codeproject.com/Articles/32376/A-Professional-HTML-Renderer-You-Will-Use
- * 
- * Redistribution and use in source and binary forms, with or without modification, are 
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
  * permitted provided that the following conditions are met:
- * 
- * Redistributions of source code must retain the above copyright notice, this list of 
+ *
+ * Redistributions of source code must retain the above copyright notice, this list of
  * conditions and the following disclaimer.
- * 
- * Redistributions in binary form must reproduce the above copyright notice, this list of 
- * conditions and the following disclaimer in the documentation and/or other materials 
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this list of
+ * conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED 
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Drawing.Drawing2D;
+using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Diagnostics;
-using System.Globalization;
-using System.Drawing;
 
 namespace MetroFramework.Drawing.Html
 {
@@ -118,18 +117,23 @@ namespace MetroFramework.Drawing.Html
                 case CssConstants.Em:
                     factor = emFactor;
                     break;
+
                 case CssConstants.Px:
                     factor = 1f;
                     break;
+
                 case CssConstants.Mm:
                     factor = 3f; //3 pixels per millimeter
                     break;
+
                 case CssConstants.Cm:
                     factor = 37f; //37 pixels per centimeter
                     break;
+
                 case CssConstants.In:
                     factor = 96f; //96 pixels per inch
                     break;
+
                 case CssConstants.Pt:
                     factor = 96f / 72f; // 1 point = 1/72 of inch
 
@@ -139,15 +143,15 @@ namespace MetroFramework.Drawing.Html
                     }
 
                     break;
+
                 case CssConstants.Pc:
                     factor = 96f / 72f * 12f; // 1 pica = 12 points
                     break;
+
                 default:
                     factor = 0f;
                     break;
             }
-
-            
 
             return factor * ParseNumber(number, hundredPercent);
         }
@@ -171,6 +175,7 @@ namespace MetroFramework.Drawing.Html
             if (colorValue.StartsWith("#"))
             {
                 #region hexadecimal forms
+
                 string hex = colorValue.Substring(1);
 
                 if (hex.Length == 6)
@@ -188,8 +193,9 @@ namespace MetroFramework.Drawing.Html
                 else
                 {
                     return onError;
-                } 
-                #endregion
+                }
+
+                #endregion hexadecimal forms
             }
             else if (colorValue.StartsWith("rgb(") && colorValue.EndsWith(")"))
             {
@@ -204,7 +210,7 @@ namespace MetroFramework.Drawing.Html
                     {
                         r = Convert.ToInt32(ParseNumber(chunks[0].Trim(), 255f));
                         g = Convert.ToInt32(ParseNumber(chunks[1].Trim(), 255f));
-                        b = Convert.ToInt32(ParseNumber(chunks[2].Trim(), 255f)); 
+                        b = Convert.ToInt32(ParseNumber(chunks[2].Trim(), 255f));
                     }
                 }
                 else
@@ -212,7 +218,7 @@ namespace MetroFramework.Drawing.Html
                     return onError;
                 }
 
-                #endregion
+                #endregion RGB forms
             }
             else
             {
@@ -270,7 +276,7 @@ namespace MetroFramework.Drawing.Html
                     b = c.B;
                 }
 
-                #endregion
+                #endregion Color Constants
             }
 
             return Color.FromArgb(r, g, b);
@@ -292,16 +298,19 @@ namespace MetroFramework.Drawing.Html
             {
                 case CssConstants.Thin:
                     return 1f;
+
                 case CssConstants.Medium:
                     return 2f;
+
                 case CssConstants.Thick:
                     return 4f;
+
                 default:
                     return Math.Abs(ParseLength(borderValue, 1, b));
             }
         }
 
-         /// <summary>
+        /// <summary>
         /// Split the value by spaces; e.g. Useful in values like 'padding:5 4 3 inherit'
         /// </summary>
         /// <param name="value">Value to be splitted</param>
@@ -319,7 +328,6 @@ namespace MetroFramework.Drawing.Html
         public static string[] SplitValues(string value, char separator)
         {
             //TODO: CRITICAL! Don't split values on parenthesis (like rgb(0, 0, 0)) or quotes ("strings")
-
 
             if (string.IsNullOrEmpty(value)) return new string[] { };
 
@@ -340,7 +348,7 @@ namespace MetroFramework.Drawing.Html
         }
 
         /// <summary>
-        /// Detects the type name in a path. 
+        /// Detects the type name in a path.
         /// E.g. Gets System.Drawing.Graphics from a path like System.Drawing.Graphics.Clear
         /// </summary>
         /// <param name="path"></param>
@@ -354,7 +362,6 @@ namespace MetroFramework.Drawing.Html
             string type = path.Substring(0, lastDot);
             moreInfo = path.Substring(lastDot + 1);
             moreInfo = moreInfo.Replace("(", string.Empty).Replace(")", string.Empty);
-
 
             foreach (Assembly a in HtmlRenderer.References)
             {
@@ -424,12 +431,11 @@ namespace MetroFramework.Drawing.Html
                     if (!finfo.Exists) return null;
 
                     return Image.FromFile(finfo.FullName);
-
                 }
                 else if (prop != null)
                 {
                     if (!prop.PropertyType.IsSubclassOf(typeof(Image)) && !prop.PropertyType.Equals(typeof(Image))) return null;
-                    
+
                     return prop.GetValue(null, null) as Image;
                 }
                 else if (method != null)
@@ -518,7 +524,6 @@ namespace MetroFramework.Drawing.Html
                     nfo.UseShellExecute = true;
 
                     Process.Start(nfo);
-
                 }
                 else if (method != null)
                 {

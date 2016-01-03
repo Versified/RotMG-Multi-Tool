@@ -50,6 +50,7 @@ namespace MetroFramework.Animation
         }
 
         #region Compatibility code
+
         private DelayedCall<object>.Callback oldCallback = null;
         private object oldData = null;
 
@@ -110,7 +111,8 @@ namespace MetroFramework.Animation
         {
             Reset(milliseconds);
         }
-        #endregion
+
+        #endregion Compatibility code
 
         public static DelayedCall Create(Callback cb, int milliseconds)
         {
@@ -313,9 +315,12 @@ namespace MetroFramework.Animation
                 }
 
                 if (callback != null) callback();
+
                 #region Compatibility code
+
                 if (oldCallback != null) oldCallback(oldData);
-                #endregion
+
+                #endregion Compatibility code
             }, null);
         }
 

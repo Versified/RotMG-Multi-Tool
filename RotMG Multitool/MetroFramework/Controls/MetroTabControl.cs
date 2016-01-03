@@ -1,28 +1,33 @@
+using MetroFramework.Components;
+using MetroFramework.Drawing;
+using MetroFramework.Interfaces;
+using MetroFramework.Native;
+
 /**
  * MetroFramework - Modern UI for WinForms
- * 
+ *
  * The MIT License (MIT)
  * Copyright (c) 2011 Sven Walter, http://github.com/viperneo
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the
  * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
+ *
+ * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-// Based on original work by 
+// Based on original work by
 // (c) Mick Doherty / Oscar Londono
 // http://dotnetrix.co.uk/tabcontrol.htm
 // http://www.pcreview.co.uk/forums/adding-custom-tabpages-design-time-t2904262.html
@@ -30,21 +35,15 @@
 // http://www.codeproject.com/Articles/278/Fully-owner-drawn-tab-control
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Design;
+using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Windows.Forms;
-
-using MetroFramework.Components;
-using MetroFramework.Drawing;
-using MetroFramework.Interfaces;
-using MetroFramework.Native;
-using System.Collections.Generic;
-using MetroFramework.Controls;
 
 namespace MetroFramework.Controls
 {
@@ -59,9 +58,10 @@ namespace MetroFramework.Controls
         { }
     }
 
-    #endregion
+    #endregion MetroTabPageCollection
 
     #region HiddenTabClass
+
     public class HiddenTabs
     {
         public HiddenTabs(int id, string page)
@@ -77,6 +77,7 @@ namespace MetroFramework.Controls
 
         public string tabpage { get { return _tabpage; } }
     }
+
     #endregion HiddenTabClass
 
     [Designer("MetroFramework.Design.Controls.MetroTabControlDesigner, " + AssemblyRef.MetroFrameworkDesignSN)]
@@ -84,8 +85,10 @@ namespace MetroFramework.Controls
     public class MetroTabControl : TabControl, IMetroControl
     {
         #region Interface
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaintBackground;
+
         protected virtual void OnCustomPaintBackground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintBackground != null)
@@ -96,6 +99,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaint;
+
         protected virtual void OnCustomPaint(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaint != null)
@@ -106,6 +110,7 @@ namespace MetroFramework.Controls
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaintForeground;
+
         protected virtual void OnCustomPaintForeground(MetroPaintEventArgs e)
         {
             if (GetStyle(ControlStyles.UserPaint) && CustomPaintForeground != null)
@@ -115,6 +120,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroColorStyle metroStyle = MetroColorStyle.Default;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(MetroColorStyle.Default)]
         public MetroColorStyle Style
@@ -141,6 +147,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroThemeStyle metroTheme = MetroThemeStyle.Default;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(MetroThemeStyle.Default)]
         public MetroThemeStyle Theme
@@ -167,6 +174,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroStyleManager metroStyleManager = null;
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MetroStyleManager StyleManager
@@ -176,6 +184,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomBackColor = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseCustomBackColor
@@ -185,6 +194,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useCustomForeColor = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseCustomForeColor
@@ -194,6 +204,7 @@ namespace MetroFramework.Controls
         }
 
         private bool useStyleColors = false;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public bool UseStyleColors
@@ -211,11 +222,13 @@ namespace MetroFramework.Controls
             set { SetStyle(ControlStyles.Selectable, value); }
         }
 
-        #endregion
+        #endregion Interface
 
         #region Fields
+
         //Additional variables to be used by HideTab and ShowTab
         private List<string> tabDisable = new List<string>();
+
         private List<string> tabOrder = new List<string>();
         private List<HiddenTabs> hidTabs = new List<HiddenTabs>();
 
@@ -225,6 +238,7 @@ namespace MetroFramework.Controls
         private const int TabBottomBorderHeight = 3;
 
         private MetroTabControlSize metroLabelSize = MetroTabControlSize.Medium;
+
         [DefaultValue(MetroTabControlSize.Medium)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroTabControlSize FontSize
@@ -234,6 +248,7 @@ namespace MetroFramework.Controls
         }
 
         private MetroTabControlWeight metroLabelWeight = MetroTabControlWeight.Light;
+
         [DefaultValue(MetroTabControlWeight.Light)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroTabControlWeight FontWeight
@@ -243,6 +258,7 @@ namespace MetroFramework.Controls
         }
 
         private ContentAlignment textAlign = ContentAlignment.MiddleLeft;
+
         [DefaultValue(ContentAlignment.MiddleLeft)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public ContentAlignment TextAlign
@@ -266,8 +282,8 @@ namespace MetroFramework.Controls
             }
         }
 
-
         private bool isMirrored;
+
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public new bool IsMirrored
@@ -287,7 +303,7 @@ namespace MetroFramework.Controls
             }
         }
 
-        #endregion
+        #endregion Fields
 
         #region Constructor
 
@@ -303,7 +319,7 @@ namespace MetroFramework.Controls
             this.Selecting += MetroTabControl_Selecting;
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Paint Methods
 
@@ -485,7 +501,7 @@ namespace MetroFramework.Controls
             }
         }
 
-        #endregion
+        #endregion Paint Methods
 
         #region Overridden Methods
 
@@ -616,14 +632,15 @@ namespace MetroFramework.Controls
             this.UpdateStyles();
         }
 
-        void MetroTabControl_Selecting(object sender, TabControlCancelEventArgs e)
+        private void MetroTabControl_Selecting(object sender, TabControlCancelEventArgs e)
         {
             if (tabDisable.Count > 0 && tabDisable.Contains(e.TabPage.Name))
             {
                 e.Cancel = true;
             }
         }
-        #endregion
+
+        #endregion Overridden Methods
 
         #region Helper Methods
 
@@ -710,9 +727,10 @@ namespace MetroFramework.Controls
             return 0;
         }
 
-        #endregion
+        #endregion Helper Methods
 
         #region Additional functions by DenRic Denise
+
         /// <summary>
         /// This will hide MetroTabPage from MetroTabControl
         /// Hidden MetroTabPage can be displayed by calling ShowTab functions
@@ -736,7 +754,7 @@ namespace MetroFramework.Controls
         public void ShowTab(MetroTabPage tabpage)
         {
             HiddenTabs result = hidTabs.Find(
-                 delegate(HiddenTabs bk)
+                 delegate (HiddenTabs bk)
                  {
                      return bk.tabpage == tabpage.Name;
                  }
@@ -744,7 +762,7 @@ namespace MetroFramework.Controls
 
             if (result != null)
             {
-                this.TabPages.Insert(result.index,tabpage);
+                this.TabPages.Insert(result.index, tabpage);
                 hidTabs.Remove(result);
             }
         }
@@ -764,7 +782,7 @@ namespace MetroFramework.Controls
                     { SelectedIndex = 0; }
                     else { SelectedIndex++; }
                 }
-              
+
                 int _tabid = this.TabPages.IndexOf(tabpage);
 
                 tabDisable.Add(tabpage.Name);
@@ -811,7 +829,7 @@ namespace MetroFramework.Controls
         public bool IsTabHidden(MetroTabPage tabpage)
         {
             HiddenTabs result = hidTabs.Find(
-                delegate(HiddenTabs bk)
+                delegate (HiddenTabs bk)
                 {
                     return bk.tabpage == tabpage.Name;
                 }
@@ -819,6 +837,7 @@ namespace MetroFramework.Controls
 
             return (result != null);
         }
-        #endregion
+
+        #endregion Additional functions by DenRic Denise
     }
 }

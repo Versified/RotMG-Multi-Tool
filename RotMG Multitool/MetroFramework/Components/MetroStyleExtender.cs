@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections;
+﻿using MetroFramework.Drawing;
+using MetroFramework.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
-using MetroFramework.Drawing;
-using MetroFramework.Interfaces;
-
 namespace MetroFramework.Components
 {
-	[ProvideProperty("ApplyMetroTheme", typeof(Control))]
+    [ProvideProperty("ApplyMetroTheme", typeof(Control))]
     public sealed class MetroStyleExtender : Component, IExtenderProvider, IMetroComponent
-	{
+    {
         #region Interface
 
         [Browsable(false)]
@@ -25,6 +22,7 @@ namespace MetroFramework.Components
         }
 
         private MetroThemeStyle metroTheme = MetroThemeStyle.Default;
+
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [DefaultValue(MetroThemeStyle.Default)]
         public MetroThemeStyle Theme
@@ -47,39 +45,39 @@ namespace MetroFramework.Components
 
                 return metroTheme;
             }
-            set 
-            { 
+            set
+            {
                 metroTheme = value;
                 UpdateTheme();
             }
         }
 
         private MetroStyleManager metroStyleManager = null;
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MetroStyleManager StyleManager
         {
             get { return metroStyleManager; }
-            set 
-            { 
+            set
+            {
                 metroStyleManager = value;
                 UpdateTheme();
             }
         }
 
-        #endregion
+        #endregion Interface
 
         #region Fields
 
         private readonly List<Control> extendedControls = new List<Control>();
 
-        #endregion
+        #endregion Fields
 
         #region Constructor
 
         public MetroStyleExtender()
         {
-        
         }
 
         public MetroStyleExtender(IContainer parent)
@@ -91,7 +89,7 @@ namespace MetroFramework.Components
             }
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Management Methods
 
@@ -119,22 +117,22 @@ namespace MetroFramework.Components
             }
         }
 
-        #endregion
+        #endregion Management Methods
 
         #region IExtenderProvider
 
         bool IExtenderProvider.CanExtend(object target)
-		{
-		    return target is Control && !(target is IMetroControl || target is IMetroForm);
-		}
+        {
+            return target is Control && !(target is IMetroControl || target is IMetroForm);
+        }
 
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         [Description("Apply Metro Theme BackColor and ForeColor.")]
         public bool GetApplyMetroTheme(Control control)
-		{
-		    return control != null && extendedControls.Contains(control);
-		}
+        {
+            return control != null && extendedControls.Contains(control);
+        }
 
         public void SetApplyMetroTheme(Control control, bool value)
         {
@@ -159,6 +157,6 @@ namespace MetroFramework.Components
             }
         }
 
-        #endregion
+        #endregion IExtenderProvider
     }
 }

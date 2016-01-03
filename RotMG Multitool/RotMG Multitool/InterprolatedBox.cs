@@ -8,9 +8,10 @@ namespace RotMG_Multitool
     /// <summary>
     /// A PictureBox control extended to allow a variety of interpolations.
     /// </summary>
-    class InterpolatedBox : PictureBox
+    internal class InterpolatedBox : PictureBox
     {
         #region Interpolation Property
+
         /// <summary>Backing Field</summary>
         private InterpolationMode interpolation = InterpolationMode.Default;
 
@@ -31,7 +32,8 @@ namespace RotMG_Multitool
                 Invalidate(); // Image should be redrawn when a different interpolation is selected
             }
         }
-        #endregion
+
+        #endregion Interpolation Property
 
         /// <summary>
         /// Overridden to modify rendering behavior.
